@@ -1,0 +1,725 @@
+title Avis Anguis
+author Terzalo
+homepage terzalo.com
+
+run_rules_on_level_start
+again_interval 0.1
+key_repeat_interval 100
+verbose_logging 
+
+========
+OBJECTS
+========
+
+Background
+#44aadd
+
+RedHead
+red white yellow
+00000
+00000
+00200
+00220
+00000
+
+RedTail1
+red
+
+RedTail2
+lightred
+
+GreenHead
+green white yellow
+00000
+00000
+00200
+00220
+00000
+
+GreenTail1
+green
+
+GreenTail2
+lightgreen
+
+BlueHead
+blue white yellow
+00000
+00000
+00200
+00220
+00000
+
+BlueTail1
+blue
+
+BlueTail2
+#0088ff
+
+Eyes
+white
+.....
+.0.0.
+.....
+.....
+.....
+
+Box1Front
+yellow 
+00000
+0...0
+0...0
+0...0
+00000
+
+Box1Back
+#ccbb58
+00000
+0...0
+0...0
+0...0
+00000
+
+Box2Front
+lightblue 
+00000
+0...0
+0...0
+0...0
+00000
+
+Box2Back
+#97bbcc
+00000
+0...0
+0...0
+0...0
+00000
+
+Box3Front
+orange 
+00000
+0...0
+0...0
+0...0
+00000
+
+Box3Back
+#cc762b
+00000
+0...0
+0...0
+0...0
+00000
+
+Soil
+brown
+00000
+00000
+00000
+00000
+00000
+
+Grass
+brown lightgreen
+11111
+01101
+00000
+00000
+00000
+
+Bush
+lightgreen
+.0.0.
+00000
+.000.
+00000
+.000.
+
+Water
+#77eeee blue
+00000
+11111
+11111
+11111
+11111
+
+Spikes
+lightgray darkgrey
+.0.0.
+01110
+.101.
+01110
+.0.0.
+
+Banana
+lightgreen yellow
+....0
+11111
+..111
+111.1
+..11.
+
+Strawberry
+lightgreen red
+.00..
+0011.
+01111
+.1111
+..11.
+
+Exit
+white red orange yellow lightgreen blue purple
+.112.
+60002
+60003
+50003
+.544.
+(.011.
+00014
+20144
+22343
+.233.)
+
+ExitClosed
+white red lightgreen blue purple
+.....
+..1..
+.402.
+..3..
+.....
+
+Arrow
+white
+..0..
+..0..
+0.0.0
+.000.
+..0..
+
+UndoHint1
+white black darkgray
+.1111
+.1000
+.1022
+.1000
+.1002
+
+UndoHint2
+white black darkgray
+1111.
+0001.
+2201.
+2001.
+0001.
+
+UndoHint3
+white black darkgray
+.1022
+.1000
+.1222
+.1111
+.....
+
+UndoHint4
+white black darkgray
+2201.
+0001.
+2221.
+1111.
+.....
+
+Last
+transparent
+
+FruitConsumed
+transparent
+
+CanMove
+transparent
+
+Player
+transparent
+
+SnakeCounter
+transparent
+
+00
+transparent
+(white)
+
+01
+transparent
+(lightgray)
+
+02
+transparent
+(gray)
+
+03
+transparent
+(darkgray)
+
+04
+transparent
+(black)
+
+05
+transparent
+
+Active
+transparent
+
+Temp
+transparent
+
+Temp2
+transparent
+
+BoxBlocker
+transparent
+
+=======
+LEGEND
+=======
+
+. = Background
+
+1 = RedHead
+2 = RedTail1
+3 = RedTail1 and Last
+
+4 = GreenHead
+5 = GreenTail1
+6 = GreenTail1 and Last
+
+7 = BlueHead
+8 = BlueTail1
+9 = BlueTail1 and Last
+
+● = Box1Front
+○ = Box1Back
+■ = Box2Front
+□ = Box2Back
+▪ = Box3Front
+▫ = Box3Back
+
+# = Soil
+* = Spikes
+% = Bush
+~ = Water
+
+E = ExitClosed
+
+b = Banana
+w = Strawberry
+
+↓ = Arrow
+
+RedTail = RedTail1 or RedTail2
+RedSnake = RedHead or RedTail
+
+GreenTail = GreenTail1 or GreenTail2
+GreenSnake = GreenHead or GreenTail
+
+BlueTail = BlueTail1 or BlueTail2
+BlueSnake = BlueHead or BlueTail
+
+Tail = RedTail or GreenTail or BlueTail
+Head = RedHead or GreenHead or BlueHead
+Snake = RedSnake or GreenSnake or BlueSnake
+
+Box1 = Box1Front or Box1Back
+Box2 = Box2Front or Box2Back
+Box3 = Box3Front or Box3Back
+Box = Box1 or Box2 or Box3
+
+Pushable = Snake or Box1Front or Box2Front or Box3Front
+
+Ground = Soil or Grass
+Hazard = Water or Spikes
+Fruit = Banana or Strawberry
+Solid = RedSnake or GreenSnake or BlueSnake or Box1Front or Box2Front or Box3Front or Ground or Fruit
+Number = 00 or 01 or 02 or 03 or 04 or 05
+
+=======
+SOUNDS
+=======
+
+sfx0 53380107
+sfx1 98382700
+sfx2 20652903
+sfx3 71426104
+undo 91478104
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Exit, ExitClosed
+Arrow
+Box1Back
+Box2Back
+Box3Back
+Solid, BoxBlocker
+Eyes
+Water, Spikes
+Bush
+UndoHint1, UndoHint2, UndoHint3, UndoHint4
+
+Player
+Number
+Last
+Active
+SnakeCounter
+FruitConsumed
+CanMove
+Temp
+Temp2
+
+======
+RULES
+======
+
+(======Level Start======)
+
+(create necessary objects)
+
+random [ ] -> [ Temp ]
+[ Player ][ Temp ] -> [ Player ][ ]
+[ Soil ][ Temp ] -> [ Soil Player SnakeCounter ][ ]
+
+(plant grass for fancy look)
+
+down [ no Ground | Soil ] -> [  | Grass ]
+
+(fill holes in background boxes)
+
+[ Box1Back | no Box1 | ... | Box1 ] -> [ Box1Back | Box1Back | ... | Box1 ]
+
+(set snake counter -- late because it uses Active)
+
+late [ SnakeCounter no Number ][RedHead][GreenHead][BlueHead] -> [ SnakeCounter 03 ][RedHead][GreenHead][BlueHead]
+late [ SnakeCounter no Number ][Active Head][no Active Head] -> [ SnakeCounter 02 ][Active Head][no Active Head]
+late [ SnakeCounter no Number ] -> [ SnakeCounter 01 ]
+
+(assign tail numbers starting from head)
+
+random [ RedHead | RedTail no Number ] -> [ RedHead | RedTail 01 ]
+random [ RedTail 01 | RedTail no Number ] -> [ RedTail 01 | RedTail 02 ]
+random [ RedTail 02 | RedTail no Number ] -> [ RedTail 02 | RedTail 03 ]
+random [ RedTail 03 | RedTail no Number ] -> [ RedTail 03 | RedTail 04 ]
+random [ RedTail 04 | RedTail no Number ] -> [ RedTail 04 | RedTail 05 ]
+
+random [ GreenHead | GreenTail no Number ] -> [ GreenHead | GreenTail 01 ]
+random [ GreenTail 01 | GreenTail no Number ] -> [ GreenTail 01 | GreenTail 02 ]
+random [ GreenTail 02 | GreenTail no Number ] -> [ GreenTail 02 | GreenTail 03 ]
+random [ GreenTail 03 | GreenTail no Number ] -> [ GreenTail 03 | GreenTail 04 ]
+random [ GreenTail 04 | GreenTail no Number ] -> [ GreenTail 04 | GreenTail 05 ]
+
+random [ BlueHead | BlueTail no Number ] -> [ BlueHead | BlueTail 01 ]
+random [ BlueTail 01 | BlueTail no Number ] -> [ BlueTail 01 | BlueTail 02 ]
+random [ BlueTail 02 | BlueTail no Number ] -> [ BlueTail 02 | BlueTail 03 ]
+random [ BlueTail 03 | BlueTail no Number ] -> [ BlueTail 03 | BlueTail 04 ]
+random [ BlueTail 04 | BlueTail no Number ] -> [ BlueTail 04 | BlueTail 05 ]
+
+(======Pre-Movement======)
+
+(if there's an undo hint, then a snake is dead -- skip all moves until player presses undo)
+
+[ UndoHint1 ] -> cancel
+
+(check if there's an active snake head)
+
+random [ ] -> [ Temp ]
+[ Active Head ][ Temp ] -> [ Active Head ][ ]
+[ Head ][ Temp ] -> [ Active Head ][ ]
+
+(make whole snakes Active)
+
+[ Active RedHead ][ no Active RedSnake ] -> [ Active RedHead ][ Active RedSnake ]
+[ Active RedHead ][ Active no RedSnake ] -> [ Active RedHead ][ no RedSnake ]
+
+[ Active GreenHead ][ no Active GreenSnake ] -> [ Active GreenHead ][ Active GreenSnake ]
+[ Active GreenHead ][ Active no GreenSnake ] -> [ Active GreenHead ][ no GreenSnake ]
+
+[ Active BlueHead ][ no Active BlueSnake ] -> [ Active BlueHead ][ Active BlueSnake ]
+[ Active BlueHead ][ Active no BlueSnake ] -> [ Active BlueHead ][ no BlueSnake ]
+
+(======Movement======)
+
+(apply gravity)
+
+startloop
+rigid down [ stationary RedSnake | no Ground ] -> [ down RedSnake |  ]
++ rigid [ down RedSnake | stationary RedSnake ] -> [ down RedSnake | down RedSnake ]
+
+rigid down [ stationary GreenSnake | no Ground ] -> [ down GreenSnake |  ]
++ rigid [ down GreenSnake | stationary GreenSnake ] -> [ down GreenSnake | down GreenSnake ]
+
+rigid down [ stationary BlueSnake | no Ground ] -> [ down BlueSnake |  ]
++ rigid [ down BlueSnake | stationary BlueSnake ] -> [ down BlueSnake | down BlueSnake ]
+
+rigid down [ stationary Box1 | no Ground ] -> [ down Box1 |  ]
++ rigid [ down Box1 | stationary Box1 ] -> [ down Box1 | down Box1 ]
+
+rigid down [ stationary Box2 | no Ground ] -> [ down Box2 |  ]
++ rigid [ down Box2 | stationary Box2 ] -> [ down Box2 | down Box2 ]
+
+rigid down [ stationary Box3 | no Ground ] -> [ down Box3 |  ]
++ rigid [ down Box3 | stationary Box3 ] -> [ down Box3 | down Box3 ]
+endloop
+
+(check if player can move -- no snakes and boxes are falling)
+
+[ Player no CanMove ] -> [ Player CanMove ]
+
+[ CanMove ][ moving Pushable ] -> [  ][ moving Pushable ]
+
+(using again prevents player from making undoable moves while snakes are falling)
+
+[ Player ] -> again
+
+(if not falling, apply movement to active Head)
+
+[ CanMove ][ moving Player ][ stationary Head Active ] -> [ CanMove ][ moving Player ][ moving Head Active ] sfx0
+
+(late-check if head of active snake moved at all)
+
+[ CanMove ][ Active > Head ] -> [ CanMove ][ Active > Head Temp ]
+late [ Active Head Temp ] -> cancel
+late [ Temp ] -> [ ]
+
+(don't let snakes move into themselves)
+
+[ CanMove ][ > Head Active | Snake Active ] -> cancel
+
+(consume fruit)
+
+[ CanMove ][ > Head Active | Fruit ][ Player ] -> [ CanMove ][ > Head Active |  ][ Player FruitConsumed ] sfx1
+
+(move the whole snake after the head)
+
+[ CanMove ][ Tail 01 Active | > Head Active ] -> [ CanMove ][ > Tail 01 Active | > Head Active ]
++[ CanMove ][ Tail 01 Active | Perpendicular Head Active ] -> [ CanMove ][ > Tail 01 Active | Perpendicular Head Active ]
+
+[ CanMove ][ Tail 02 Active | > Tail 01 Active ] -> [ CanMove ][ > Tail 02 Active | > Tail 01 Active ]
++[ CanMove ][ Tail 02 Active | Perpendicular Tail 01 Active ] -> [ CanMove ][ > Tail 02 Active | Perpendicular Tail 01 Active ]
+
+[ CanMove ][ Tail 03 Active | > Tail 02 Active ] -> [ CanMove ][ > Tail 03 Active | > Tail 02 Active ]
++[ CanMove ][ Tail 03 Active | Perpendicular Tail 02 Active ] -> [ CanMove ][ > Tail 03 Active | Perpendicular Tail 02 Active ]
+
+[ CanMove ][ Tail 04 Active | > Tail 03 Active ] -> [ CanMove ][ > Tail 04 Active | > Tail 03 Active ]
++[ CanMove ][ Tail 04 Active | Perpendicular Tail 03 Active ] -> [ CanMove ][ > Tail 04 Active | Perpendicular Tail 03 Active ]
+
+[ CanMove ][ Tail 05 Active | > Tail 04 Active ] -> [ CanMove ][ > Tail 05 Active | > Tail 04 Active ]
++[ CanMove ][ Tail 05 Active | Perpendicular Tail 04 Active ] -> [ CanMove ][ > Tail 05 Active | Perpendicular Tail 04 Active ]
+
+(let snakes push each other and boxes)
+
+startloop
+rigid [ CanMove ][ moving RedSnake | stationary RedSnake ] -> [ CanMove ][ moving RedSnake | moving RedSnake ]
++ [ CanMove ][ >  Pushable no RedSnake | stationary RedSnake ] -> [ CanMove ][  >  Pushable no RedSnake | > RedSnake  ]
+
+ rigid [ CanMove ][ moving GreenSnake | stationary GreenSnake ] -> [ CanMove ][ moving GreenSnake | moving GreenSnake ]
++ [ CanMove ][ >  Pushable no GreenSnake | stationary GreenSnake ] -> [ CanMove ][  >  Pushable no GreenSnake | > GreenSnake  ]
+
+rigid [ CanMove ][ moving BlueSnake | stationary BlueSnake ] -> [ CanMove ][ moving BlueSnake | moving BlueSnake ]
++ [ CanMove ][ >  Pushable no BlueSnake | stationary BlueSnake ] -> [ CanMove ][  >  Pushable no BlueSnake | > BlueSnake  ]
+
+rigid [ CanMove ][ moving Box1 | stationary Box1 ] -> [ CanMove ][ moving Box1 | moving Box1 ]
++ [ CanMove ][ >  Pushable no Box1Front | stationary Box1Front ] -> [ CanMove ][  >  Pushable no Box1Front | > Box1Front  ]
+
+rigid [ CanMove ][ moving Box2 | stationary Box2 ] -> [ CanMove ][ moving Box2 | moving Box2 ]
++ [ CanMove ][ >  Pushable no Box2Front | stationary Box2Front ] -> [ CanMove ][  >  Pushable no Box2Front | > Box2Front  ]
+
+rigid [ CanMove ][ moving Box3 | stationary Box3 ] -> [ CanMove ][ moving Box3 | moving Box3 ]
++ [ CanMove ][ >  Pushable no Box3Front | stationary Box3Front ] -> [ CanMove ][  >  Pushable no Box3Front | > Box3Front  ]
+endloop
+
+(don't let snakes commit suicide and kill each other)
+
+[ CanMove ][ > Snake | Hazard ] -> cancel
+
+(don't let boxes fall through spikes)
+
+[ > Pushable no Snake | Spikes ] -> [ > Pushable | Spikes BoxBlocker ]
+late [ BoxBlocker ] -> [ ]
+
+(stop boxes and snakes from moving into active snake)
+(this is necessary to prevent snakes from pushing objects that will clash into them from behind)
+
+[ CanMove ][ > Pushable no RedSnake | RedSnake Active no Last ] -> cancel
+[ CanMove ][ > Pushable no GreenSnake | GreenSnake Active no Last ] -> cancel
+[ CanMove ][ > Pushable no BlueSnake | BlueSnake Active no Last ] -> cancel
+
+(move snake attributes)
+
+[ > Tail stationary Number ] -> [ > Tail > Number ]
+[ > Tail stationary Last ] -> [ > Tail > Last ]
+
+(don't move Last mark if fruit was consumed)
+
+[ FruitConsumed ][ > Tail Active > Last ] -> [][ > Tail Active stationary Last ]
+[ > Snake stationary Active ] -> [ > Snake > Active ]
+
+(switch active snake)
+
+[action Player][Active RedHead][GreenHead] -> [Player][RedHead][Active GreenHead]
+[action Player][Active RedHead][BlueHead] -> [Player][RedHead][Active BlueHead]
+[action Player][Active GreenHead][BlueHead] -> [Player][GreenHead][Active BlueHead]
+[action Player][Active GreenHead][RedHead] -> [Player][GreenHead][Active RedHead]
+[action Player][Active BlueHead][RedHead] -> [Player][BlueHead][Active RedHead]
+[action Player][Active BlueHead][GreenHead] -> [Player][BlueHead][Active GreenHead]
+
+(======Post-Movement======)
+
+(reset temporary objects)
+
+late [ CanMove ] -> [ ]
+
+late [ FruitConsumed ] -> [ ]
+
+(create new snake part)
+
+late [ Active RedSnake ][ Last no Snake ] -> [ Active RedSnake ][ Last RedTail1 ]
+late [ Active GreenSnake ][ Last no Snake ] -> [ Active GreenSnake ][ Last GreenTail1 ]
+late [ Active BlueSnake ][ Last no Snake ] -> [ Active BlueSnake ][ Last BlueTail1 ]
+
+(assign number to new snake part after fruit consumption)
+
+late [ RedTail 04 | Last RedTail no Number ] -> [ RedTail 04 | Last RedTail 05 ]
+late [ RedTail 03 | Last RedTail no Number ] -> [ RedTail 03 | Last RedTail 04 ]
+late [ RedTail 02 | Last RedTail no Number ] -> [ RedTail 02 | Last RedTail 03 ]
+late [ RedTail 01 | Last RedTail no Number ] -> [ RedTail 01 | Last RedTail 02 ]
+late [ RedHead | Last RedTail no Number ] -> [ RedHead | Last RedTail 01 ]
+
+late [ GreenTail 04 | Last GreenTail no Number ] -> [ GreenTail 04 | Last GreenTail 05 ]
+late [ GreenTail 03 | Last GreenTail no Number ] -> [ GreenTail 03 | Last GreenTail 04 ]
+late [ GreenTail 02 | Last GreenTail no Number ] -> [ GreenTail 02 | Last GreenTail 03 ]
+late [ GreenTail 01 | Last GreenTail no Number ] -> [ GreenTail 01 | Last GreenTail 02 ]
+late [ GreenHead | Last GreenTail no Number ] -> [ GreenHead | Last GreenTail 01 ]
+
+late [ BlueTail 04 | Last BlueTail no Number ] -> [ BlueTail 04 | Last BlueTail 05 ]
+late [ BlueTail 03 | Last BlueTail no Number ] -> [ BlueTail 03 | Last BlueTail 04 ]
+late [ BlueTail 02 | Last BlueTail no Number ] -> [ BlueTail 02 | Last BlueTail 03 ]
+late [ BlueTail 01 | Last BlueTail no Number ] -> [ BlueTail 01 | Last BlueTail 02 ]
+late [ BlueHead | Last BlueTail no Number ] -> [ BlueHead | Last BlueTail 01 ]
+
+(snakes die when touching water and spikes)
+
+late [ RedSnake Hazard ][ RedSnake Last ] -> [ RedSnake Hazard ][ RedSnake ]
+late [ RedSnake Hazard ][ RedSnake Number ] -> [ RedSnake Hazard ][ RedSnake ]
+late [ RedSnake Hazard ][ RedSnake no Hazard ] -> [ RedSnake Hazard ][ ]
+
+late [ GreenSnake Hazard ][ GreenSnake Last ] -> [ GreenSnake Hazard ][ GreenSnake ]
+late [ GreenSnake Hazard ][ GreenSnake Number ] -> [ GreenSnake Hazard ][ GreenSnake ]
+late [ GreenSnake Hazard ][ GreenSnake no Hazard ] -> [ GreenSnake Hazard ][ ]
+
+late [ BlueSnake Hazard ][ BlueSnake Last ] -> [ BlueSnake Hazard ][ BlueSnake ]
+late [ BlueSnake Hazard ][ BlueSnake Number ] -> [ BlueSnake Hazard ][ BlueSnake ]
+late [ BlueSnake Hazard ][ BlueSnake no Hazard ] -> [ BlueSnake Hazard ][ ]
+
+(draw undo hint when snake dies)
+
+late random up [ Snake Hazard | ] -> [ Snake Hazard | UndoHint1 ]
+late random right [ UndoHint1 | ] -> [ UndoHint1 | UndoHint2 ]
+late random down [ UndoHint1 | ] -> [ UndoHint1 | UndoHint3 ]
+late random right [ UndoHint3 | ] -> [ UndoHint3 | UndoHint4 ]
+
+late [ Snake Hazard ] -> [ Hazard ] sfx3
+
+(boxes vanish when touching water)
+
+late [ Box1 Water ][ Box1 no Water ] -> [ Box1 Water ][ ]
+late [ Box2 Water ][ Box2 no Water ] -> [ Box2 Water ][ ]
+late [ Box3 Water ][ Box3 no Water ] -> [ Box3 Water ][ ]
+
+late [ Box Water ] -> [ Water ]
+
+(check if there are fruits left)
+
+late [ ExitClosed ] -> [ Exit ]
+late [ Fruit ][ Exit ] -> [ Fruit ][ ExitClosed ]
+
+(remove snakes that reached portal and count down)
+
+late [ RedHead Exit ][ RedSnake Last ] -> [ RedHead Exit ][ RedSnake ]
+late [ RedHead Exit ][ RedSnake Number ] -> [ RedHead Exit ][ RedSnake ]
+late [ RedHead Exit ][ RedSnake no Exit ] -> [ RedHead Exit ][ ]
+
+late [ GreenHead Exit ][ GreenSnake Last ] -> [ GreenHead Exit ][ GreenSnake ]
+late [ GreenHead Exit ][ GreenSnake Number ] -> [ GreenHead Exit ][ GreenSnake ]
+late [ GreenHead Exit ][ GreenSnake no Exit ] -> [ GreenHead Exit ][ ]
+
+late [ BlueHead Exit ][ BlueSnake Last ] -> [ BlueHead Exit ][ BlueSnake ]
+late [ BlueHead Exit ][ BlueSnake Number ] -> [ BlueHead Exit ][ BlueSnake ]
+late [ BlueHead Exit ][ BlueSnake no Exit ] -> [ BlueHead Exit ][ ]
+
+late [ Head Exit ][ SnakeCounter 01 ] -> [ Head Exit ][ SnakeCounter 00 ]
+late [ Head Exit ][ SnakeCounter 02 ] -> [ Head Exit ][ SnakeCounter 01 ]
+late [ Head Exit ][ SnakeCounter 03 ] -> [ Head Exit ][ SnakeCounter 02 ]
+late [ Head Exit ] -> [ Exit ] sfx2
+
+(add eyes to active snake)
+
+late [ Eyes ] -> []
+late [ Active Head ] -> [ Active Head Eyes ]
+
+(make snakes stripey)
+
+late [ RedTail1 01 ] -> [ RedTail2 01 ]
+late [ RedTail1 03 ] -> [ RedTail2 03 ]
+late [ RedTail1 05 ] -> [ RedTail2 05 ]
+
+late [ GreenTail1 01 ] -> [ GreenTail2 01 ]
+late [ GreenTail1 03 ] -> [ GreenTail2 03 ]
+late [ GreenTail1 05 ] -> [ GreenTail2 05 ]
+
+late [ BlueTail1 01 ] -> [ BlueTail2 01 ]
+late [ BlueTail1 03 ] -> [ BlueTail2 03 ]
+late [ BlueTail1 05 ] -> [ BlueTail2 05 ]
+
+(remove hint arrows from consumed fruits)
+
+down [ Arrow | no Fruit ] -> [  |  ]
+
+
+==============
+WINCONDITIONS
+==============
+
+Any SnakeCounter on 00
+
+=======
+LEVELS
+=======
+
+..........................................
+..........................................
+..........................................
+..........................................
+..........................................
+..........................................
+..........................................
+..........................................
+..........................................
+..........................b.....******....
+...............................*######....
+.........................▪w.....*#####....
+........................▪▪.......e..###...
+......................#########......##...
+.....................#########.......##...
+.....................■□□■...##........##..
+.....................#..■..9#.........##..
+.................13..#.#■..8#.........##..
+.........64......●●..#.#■.78#........###..
+......######..########.##.###........##...
+........####..###########............##...
+..........##***##########............##...
+....................####.............###..
+.....................###..............##..
+......................##..............##..
+......................##..............##..
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
