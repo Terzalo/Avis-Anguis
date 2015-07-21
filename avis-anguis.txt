@@ -607,6 +607,10 @@ late [ Active BlueSnake ][ Last no Snake ] -> [ Active BlueSnake ][ Last BlueTai
 
 (assign number to new snake part after fruit consumption)
 
+late [ RedTail 05 | Last RedTail no Number ] -> message Length limit exceeded! Bugs are imminent!
+late [ GreenTail 05 | Last GreenTail no Number ] -> message Length limit exceeded! Bugs are imminent!
+late [ BlueTail 05 | Last BlueTail no Number ] -> message Length limit exceeded! Bugs are imminent!
+
 late [ RedTail 04 | Last RedTail no Number ] -> [ RedTail 04 | Last RedTail 05 ]
 late [ RedTail 03 | Last RedTail no Number ] -> [ RedTail 03 | Last RedTail 04 ]
 late [ RedTail 02 | Last RedTail no Number ] -> [ RedTail 02 | Last RedTail 03 ]
