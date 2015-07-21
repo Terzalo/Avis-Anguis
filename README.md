@@ -1,4 +1,4 @@
-# Avis-Anguis
+# Avis Anguis
 PuzzleScript port of Snakebird.
 
 [Play here](http://www.puzzlescript.net/play.html?p=6ff17e39a79a70840a46 "Play Avis Anguis")
