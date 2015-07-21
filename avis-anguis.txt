@@ -405,24 +405,38 @@ late [ SnakeCounter no Number ][Active Head][no Active Head] -> [ SnakeCounter 0
 late [ SnakeCounter no Number ] -> [ SnakeCounter 01 ]
 
 (assign tail numbers starting from head)
+(loop to prevent snakes from forming a tail that won't include all parts)
+(probably not the best solution)
 
+startloop
 random [ RedHead | RedTail no Number ] -> [ RedHead | RedTail 01 ]
 random [ RedTail 01 | RedTail no Number ] -> [ RedTail 01 | RedTail 02 ]
 random [ RedTail 02 | RedTail no Number ] -> [ RedTail 02 | RedTail 03 ]
 random [ RedTail 03 | RedTail no Number ] -> [ RedTail 03 | RedTail 04 ]
 random [ RedTail 04 | RedTail no Number ] -> [ RedTail 04 | RedTail 05 ]
 
+[ RedTail no Number ][ RedTail Number ] -> [ RedTail ][ RedTail ]
+endloop
+
+startloop
 random [ GreenHead | GreenTail no Number ] -> [ GreenHead | GreenTail 01 ]
 random [ GreenTail 01 | GreenTail no Number ] -> [ GreenTail 01 | GreenTail 02 ]
 random [ GreenTail 02 | GreenTail no Number ] -> [ GreenTail 02 | GreenTail 03 ]
 random [ GreenTail 03 | GreenTail no Number ] -> [ GreenTail 03 | GreenTail 04 ]
 random [ GreenTail 04 | GreenTail no Number ] -> [ GreenTail 04 | GreenTail 05 ]
 
+[ GreenTail no Number ][ GreenTail Number ] -> [ GreenTail ][ GreenTail ]
+endloop
+
+startloop
 random [ BlueHead | BlueTail no Number ] -> [ BlueHead | BlueTail 01 ]
 random [ BlueTail 01 | BlueTail no Number ] -> [ BlueTail 01 | BlueTail 02 ]
 random [ BlueTail 02 | BlueTail no Number ] -> [ BlueTail 02 | BlueTail 03 ]
 random [ BlueTail 03 | BlueTail no Number ] -> [ BlueTail 03 | BlueTail 04 ]
 random [ BlueTail 04 | BlueTail no Number ] -> [ BlueTail 04 | BlueTail 05 ]
+
+[ BlueTail no Number ][ BlueTail Number ] -> [ BlueTail ][ BlueTail ]
+endloop
 
 (======Pre-Movement======)
 
