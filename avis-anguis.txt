@@ -568,6 +568,10 @@ late [ BoxBlocker ] -> [ ]
 [ CanMove ][ > Pushable no GreenSnake | GreenSnake Active no Last ] -> cancel
 [ CanMove ][ > Pushable no BlueSnake | BlueSnake Active no Last ] -> cancel
 
+[ CanMove ][ > Pushable no RedSnake | perpendicular RedSnake Active Last ] -> cancel
+[ CanMove ][ > Pushable no GreenSnake | perpendicular GreenSnake Active Last ] -> cancel
+[ CanMove ][ > Pushable no BlueSnake | perpendicular BlueSnake Active Last ] -> cancel
+
 (move snake attributes)
 
 [ > Tail stationary Number ] -> [ > Tail > Number ]
