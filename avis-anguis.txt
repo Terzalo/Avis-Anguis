@@ -287,15 +287,12 @@ LEGEND
 
 1 = RedHead
 2 = RedTail1
-3 = RedTail1 and Last
 
 4 = GreenHead
 5 = GreenTail1
-6 = GreenTail1 and Last
 
 7 = BlueHead
 8 = BlueTail1
-9 = BlueTail1 and Last
 
 ● = Box1Front
 ○ = Box1Back
@@ -409,32 +406,35 @@ late [ SnakeCounter no Number ] -> [ SnakeCounter 01 ]
 (probably not the best solution)
 
 startloop
-random [ RedHead | RedTail no Number ] -> [ RedHead | RedTail 01 ]
-random [ RedTail 01 | RedTail no Number ] -> [ RedTail 01 | RedTail 02 ]
-random [ RedTail 02 | RedTail no Number ] -> [ RedTail 02 | RedTail 03 ]
-random [ RedTail 03 | RedTail no Number ] -> [ RedTail 03 | RedTail 04 ]
-random [ RedTail 04 | RedTail no Number ] -> [ RedTail 04 | RedTail 05 ]
+random [ RedHead | RedTail no Number ] -> [ RedHead | RedTail 01 Last ]
+random [ RedTail 01 Last | RedTail no Number ] -> [ RedTail 01 | RedTail 02 Last ]
+random [ RedTail 02 Last | RedTail no Number ] -> [ RedTail 02 | RedTail 03 Last ]
+random [ RedTail 03 Last | RedTail no Number ] -> [ RedTail 03 | RedTail 04 Last ]
+random [ RedTail 04 Last | RedTail no Number ] -> [ RedTail 04 | RedTail 05 Last ]
 
+[ RedTail no Number ][ RedTail Last ] -> [ Redtail ][ RedTail ]
 [ RedTail no Number ][ RedTail Number ] -> [ RedTail ][ RedTail ]
 endloop
 
 startloop
-random [ GreenHead | GreenTail no Number ] -> [ GreenHead | GreenTail 01 ]
-random [ GreenTail 01 | GreenTail no Number ] -> [ GreenTail 01 | GreenTail 02 ]
-random [ GreenTail 02 | GreenTail no Number ] -> [ GreenTail 02 | GreenTail 03 ]
-random [ GreenTail 03 | GreenTail no Number ] -> [ GreenTail 03 | GreenTail 04 ]
-random [ GreenTail 04 | GreenTail no Number ] -> [ GreenTail 04 | GreenTail 05 ]
+random [ GreenHead | GreenTail no Number ] -> [ GreenHead | GreenTail 01 Last ]
+random [ GreenTail 01 Last | GreenTail no Number ] -> [ GreenTail 01 | GreenTail 02 Last ]
+random [ GreenTail 02 Last | GreenTail no Number ] -> [ GreenTail 02 | GreenTail 03 Last ]
+random [ GreenTail 03 Last | GreenTail no Number ] -> [ GreenTail 03 | GreenTail 04 Last ]
+random [ GreenTail 04 Last | GreenTail no Number ] -> [ GreenTail 04 | GreenTail 05 Last ]
 
+[ GreenTail no Number ][ GreenTail Last ] -> [ GreenTail ][ GreenTail ]
 [ GreenTail no Number ][ GreenTail Number ] -> [ GreenTail ][ GreenTail ]
 endloop
 
 startloop
-random [ BlueHead | BlueTail no Number ] -> [ BlueHead | BlueTail 01 ]
-random [ BlueTail 01 | BlueTail no Number ] -> [ BlueTail 01 | BlueTail 02 ]
-random [ BlueTail 02 | BlueTail no Number ] -> [ BlueTail 02 | BlueTail 03 ]
-random [ BlueTail 03 | BlueTail no Number ] -> [ BlueTail 03 | BlueTail 04 ]
-random [ BlueTail 04 | BlueTail no Number ] -> [ BlueTail 04 | BlueTail 05 ]
+random [ BlueHead | BlueTail no Number ] -> [ BlueHead | BlueTail 01 Last ]
+random [ BlueTail 01 Last | BlueTail no Number ] -> [ BlueTail 01 | BlueTail 02 Last ]
+random [ BlueTail 02 Last | BlueTail no Number ] -> [ BlueTail 02 | BlueTail 03 Last ]
+random [ BlueTail 03 Last | BlueTail no Number ] -> [ BlueTail 03 | BlueTail 04 Last ]
+random [ BlueTail 04 Last | BlueTail no Number ] -> [ BlueTail 04 | BlueTail 05 Last ]
 
+[ BlueTail no Number ][ BlueTail Last ] -> [ BlueTail ][ BlueTail ]
 [ BlueTail no Number ][ BlueTail Number ] -> [ BlueTail ][ BlueTail ]
 endloop
 
@@ -734,9 +734,9 @@ LEVELS
 ......................#########......##...
 .....................#########.......##...
 .....................■□□■...##........##..
-.....................#..■..9#.........##..
-.................13..#.#■..8#.........##..
-.........64......●●..#.#■.78#........###..
+.....................#..■..8#.........##..
+.................12..#.#■..8#.........##..
+.........54......●●..#.#■.78#........###..
 ......######..########.##.###........##...
 ........####..###########............##...
 ..........##***##########............##...
