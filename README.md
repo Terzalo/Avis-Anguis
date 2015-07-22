@@ -7,7 +7,6 @@ There's just one demo level for the time being.
 
 Differences with Snakebird mechanics:
 
-- Limited snake length (up to 6 tiles, increasable by adding a few rules)
 - Limited number of movable boxes (up to 3, increasable)
 - No teleporter yet.
 - You have to manually undo last move if a snake died.
