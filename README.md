@@ -12,6 +12,9 @@ Differences with Snakebird mechanics:
 - You have to manually undo last move if a snake died.
 - Useless "jumps" straight upward are not discarded from history.
 
+[PuzzleScript](http://www.puzzlescript.net/ "Official website") by [Stephen Lavelle](http://www.increpare.com/ "www.increpare.com")  
+[Snakebird](http://snakebird.noumenongames.com/ "Official website") by [Noumenon Games](http://noumenongames.com/ "Official website")
+
 ## How to make levels
 
 ### The tools
