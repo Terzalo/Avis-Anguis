@@ -189,14 +189,6 @@ white red lightgreen blue purple
 ..3..
 .....
 
-Arrow
-white
-..0..
-..0..
-0.0.0
-.000.
-..0..
-
 UndoHint1
 white black darkgray
 .1111
@@ -231,6 +223,12 @@ white black darkgray
 
 Last
 transparent
+(Purple
+.....
+.....
+..0..
+.....
+.....)
 
 FruitConsumed
 transparent
@@ -267,8 +265,46 @@ transparent
 05
 transparent
 
+North
+white
+..0..
+.000.
+0.0.0
+..0..
+..0..
+
+South
+white
+..0..
+..0..
+0.0.0
+.000.
+..0..
+
+West
+white
+..0..
+.0...
+00000
+.0...
+..0..
+
+East
+white
+..0..
+...0.
+00000
+...0.
+..0..
+
 Active
 transparent
+(yellow
+0...0
+.....
+.....
+.....
+0...0)
 
 Temp
 transparent
@@ -286,13 +322,13 @@ LEGEND
 . = Background
 
 1 = RedHead
-2 = RedTail1
+2 = GreenHead
+3 = BlueHead
 
-4 = GreenHead
-5 = GreenTail1
-
-7 = BlueHead
-8 = BlueTail1
+↑ = North
+↓ = South
+← = West
+→ = East
 
 ● = Box1Front
 ○ = Box1Back
@@ -310,8 +346,6 @@ E = ExitClosed
 
 b = Banana
 w = Strawberry
-
-↓ = Arrow
 
 RedTail = RedTail1 or RedTail2
 RedSnake = RedHead or RedTail
@@ -338,6 +372,7 @@ Hazard = Water or Spikes
 Fruit = Banana or Strawberry
 Solid = RedSnake or GreenSnake or BlueSnake or Box1Front or Box2Front or Box3Front or Ground or Fruit
 Number = 00 or 01 or 02 or 03 or 04 or 05
+Direction = North or South or West or East
 
 =======
 SOUNDS
@@ -354,8 +389,8 @@ COLLISIONLAYERS
 ================
 
 Background
+Direction
 Exit, ExitClosed
-Arrow
 Box1Back
 Box2Back
 Box3Back
@@ -401,42 +436,53 @@ late [ SnakeCounter no Number ][RedHead][GreenHead][BlueHead] -> [ SnakeCounter 
 late [ SnakeCounter no Number ][Active Head][no Active Head] -> [ SnakeCounter 02 ][Active Head][no Active Head]
 late [ SnakeCounter no Number ] -> [ SnakeCounter 01 ]
 
-(assign tail numbers starting from head)
-(loop to prevent snakes from forming a tail that won't include all parts)
-(probably not the best solution)
+(create snakes)
 
-startloop
-random [ RedHead | RedTail no Number ] -> [ RedHead | RedTail 01 Last ]
-random [ RedTail 01 Last | RedTail no Number ] -> [ RedTail 01 | RedTail 02 Last ]
-random [ RedTail 02 Last | RedTail no Number ] -> [ RedTail 02 | RedTail 03 Last ]
-random [ RedTail 03 Last | RedTail no Number ] -> [ RedTail 03 | RedTail 04 Last ]
-random [ RedTail 04 Last | RedTail no Number ] -> [ RedTail 04 | RedTail 05 Last ]
+up [ RedHead | no Snake South ] -> [ RedHead | RedTail2 Last South ]
+down [ RedHead | no Snake North ] -> [ RedHead | RedTail2 Last North ]
+left [ RedHead | no Snake East ] -> [ RedHead | RedTail2 Last East ]
+right [ RedHead | no Snake West ] -> [ RedHead | RedTail2 Last West ]
 
-[ RedTail no Number ][ RedTail Last ] -> [ Redtail ][ RedTail ]
-[ RedTail no Number ][ RedTail Number ] -> [ RedTail ][ RedTail ]
-endloop
+up [ RedTail1 Last | no Snake South ] -> [ RedTail1 | RedTail2 Last South ]
++ down [ RedTail1 Last | no Snake North ] -> [ RedTail1 | RedTail2 Last North ]
++ left [ RedTail1 Last | no Snake East ] -> [ RedTail1 | RedTail2 Last East ]
++ right [ RedTail1 Last | no Snake West ] -> [ RedTail1 | RedTail2 Last West ]
 
-startloop
-random [ GreenHead | GreenTail no Number ] -> [ GreenHead | GreenTail 01 Last ]
-random [ GreenTail 01 Last | GreenTail no Number ] -> [ GreenTail 01 | GreenTail 02 Last ]
-random [ GreenTail 02 Last | GreenTail no Number ] -> [ GreenTail 02 | GreenTail 03 Last ]
-random [ GreenTail 03 Last | GreenTail no Number ] -> [ GreenTail 03 | GreenTail 04 Last ]
-random [ GreenTail 04 Last | GreenTail no Number ] -> [ GreenTail 04 | GreenTail 05 Last ]
++ up [ RedTail2 Last | no Snake South ] -> [ RedTail2 | RedTail1 Last South ]
++ down [ RedTail2 Last | no Snake North ] -> [ RedTail2 | RedTail1 Last North ]
++ left [ RedTail2 Last | no Snake East ] -> [ RedTail2 | RedTail1 Last East ]
++ right [ RedTail2 Last | no Snake West ] -> [ RedTail2 | RedTail1 Last West ]
 
-[ GreenTail no Number ][ GreenTail Last ] -> [ GreenTail ][ GreenTail ]
-[ GreenTail no Number ][ GreenTail Number ] -> [ GreenTail ][ GreenTail ]
-endloop
 
-startloop
-random [ BlueHead | BlueTail no Number ] -> [ BlueHead | BlueTail 01 Last ]
-random [ BlueTail 01 Last | BlueTail no Number ] -> [ BlueTail 01 | BlueTail 02 Last ]
-random [ BlueTail 02 Last | BlueTail no Number ] -> [ BlueTail 02 | BlueTail 03 Last ]
-random [ BlueTail 03 Last | BlueTail no Number ] -> [ BlueTail 03 | BlueTail 04 Last ]
-random [ BlueTail 04 Last | BlueTail no Number ] -> [ BlueTail 04 | BlueTail 05 Last ]
+up [ GreenHead | no Snake South ] -> [ GreenHead | GreenTail2 Last South ]
+down [ GreenHead | no Snake North ] -> [ GreenHead | GreenTail2 Last North ]
+left [ GreenHead | no Snake East ] -> [ GreenHead | GreenTail2 Last East ]
+right [ GreenHead | no Snake West ] -> [ GreenHead | GreenTail2 Last West ]
 
-[ BlueTail no Number ][ BlueTail Last ] -> [ BlueTail ][ BlueTail ]
-[ BlueTail no Number ][ BlueTail Number ] -> [ BlueTail ][ BlueTail ]
-endloop
+up [ GreenTail1 Last | no Snake South ] -> [ GreenTail1 | GreenTail2 Last South ]
++ down [ GreenTail1 Last | no Snake North ] -> [ GreenTail1 | GreenTail2 Last North ]
++ left [ GreenTail1 Last | no Snake East ] -> [ GreenTail1 | GreenTail2 Last East ]
++ right [ GreenTail1 Last | no Snake West ] -> [ GreenTail1 | GreenTail2 Last West ]
+
++ up [ GreenTail2 Last | no Snake South ] -> [ GreenTail2 | GreenTail1 Last South ]
++ down [ GreenTail2 Last | no Snake North ] -> [ GreenTail2 | GreenTail1 Last North ]
++ left [ GreenTail2 Last | no Snake East ] -> [ GreenTail2 | GreenTail1 Last East ]
++ right [ GreenTail2 Last | no Snake West ] -> [ GreenTail2 | GreenTail1 Last West ]
+
+up [ BlueHead | no Snake South ] -> [ BlueHead | BlueTail2 Last South ]
+down [ BlueHead | no Snake North ] -> [ BlueHead | BlueTail2 Last North ]
+left [ BlueHead | no Snake East ] -> [ BlueHead | BlueTail2 Last East ]
+right [ BlueHead | no Snake West ] -> [ BlueHead | BlueTail2 Last West ]
+
+up [ BlueTail1 Last | no Snake South ] -> [ BlueTail1 | BlueTail2 Last South ]
++ down [ BlueTail1 Last | no Snake North ] -> [ BlueTail1 | BlueTail2 Last North ]
++ left [ BlueTail1 Last | no Snake East ] -> [ BlueTail1 | BlueTail2 Last East ]
++ right [ BlueTail1 Last | no Snake West ] -> [ BlueTail1 | BlueTail2 Last West ]
+
++ up [ BlueTail2 Last | no Snake South ] -> [ BlueTail2 | BlueTail1 Last South ]
++ down [ BlueTail2 Last | no Snake North ] -> [ BlueTail2 | BlueTail1 Last North ]
++ left [ BlueTail2 Last | no Snake East ] -> [ BlueTail2 | BlueTail1 Last East ]
++ right [ BlueTail2 Last | no Snake West ] -> [ BlueTail2 | BlueTail1 Last West ]
 
 (======Pre-Movement======)
 
@@ -524,20 +570,15 @@ late [ Temp ] -> [ ]
 
 (move the whole snake after the head)
 
-[ CanMove ][ Tail 01 Active | > Head Active ] -> [ CanMove ][ > Tail 01 Active | > Head Active ]
-+[ CanMove ][ Tail 01 Active | Perpendicular Head Active ] -> [ CanMove ][ > Tail 01 Active | Perpendicular Head Active ]
+[ CanMove ][ up Head Active ] -> [ CanMove ][ up Head Active North ]
+[ CanMove ][ down Head Active ] -> [ CanMove ][ down Head Active South ]
+[ CanMove ][ left Head Active ] -> [ CanMove ][ left Head Active West ]
+[ CanMove ][ right Head Active ] -> [ CanMove ][ right Head Active East ]
 
-[ CanMove ][ Tail 02 Active | > Tail 01 Active ] -> [ CanMove ][ > Tail 02 Active | > Tail 01 Active ]
-+[ CanMove ][ Tail 02 Active | Perpendicular Tail 01 Active ] -> [ CanMove ][ > Tail 02 Active | Perpendicular Tail 01 Active ]
-
-[ CanMove ][ Tail 03 Active | > Tail 02 Active ] -> [ CanMove ][ > Tail 03 Active | > Tail 02 Active ]
-+[ CanMove ][ Tail 03 Active | Perpendicular Tail 02 Active ] -> [ CanMove ][ > Tail 03 Active | Perpendicular Tail 02 Active ]
-
-[ CanMove ][ Tail 04 Active | > Tail 03 Active ] -> [ CanMove ][ > Tail 04 Active | > Tail 03 Active ]
-+[ CanMove ][ Tail 04 Active | Perpendicular Tail 03 Active ] -> [ CanMove ][ > Tail 04 Active | Perpendicular Tail 03 Active ]
-
-[ CanMove ][ Tail 05 Active | > Tail 04 Active ] -> [ CanMove ][ > Tail 05 Active | > Tail 04 Active ]
-+[ CanMove ][ Tail 05 Active | Perpendicular Tail 04 Active ] -> [ CanMove ][ > Tail 05 Active | Perpendicular Tail 04 Active ]
+[ CanMove ][ > Head Active ][ stationary Tail Active North ] -> [ CanMove ][ > Head Active ][ up Tail Active North ]
+[ CanMove ][ > Head Active ][ stationary Tail Active South ] -> [ CanMove ][ > Head Active ][ down Tail Active South ]
+[ CanMove ][ > Head Active ][ stationary Tail Active West ] -> [ CanMove ][ > Head Active ][ left Tail Active West ]
+[ CanMove ][ > Head Active ][ stationary Tail Active East ] -> [ CanMove ][ > Head Active ][ right Tail Active East ]
 
 (let snakes push each other and boxes)
 
@@ -571,7 +612,7 @@ endloop
 late [ BoxBlocker ] -> [ ]
 
 (stop boxes and snakes from moving into active snake)
-(this is necessary to prevent snakes from pushing objects that will clash into them from behind)
+(this is necessary to prevent snakes from pushing objects that will clash into them from behind -- deadlock)
 
 [ CanMove ][ > Pushable no RedSnake | RedSnake Active no Last ] -> cancel
 [ CanMove ][ > Pushable no GreenSnake | GreenSnake Active no Last ] -> cancel
@@ -583,7 +624,7 @@ late [ BoxBlocker ] -> [ ]
 
 (move snake attributes)
 
-[ > Tail stationary Number ] -> [ > Tail > Number ]
+[ > Snake stationary Active ] -> [ > Snake > Active ]
 [ > Tail stationary Last ] -> [ > Tail > Last ]
 
 (don't move Last mark if fruit was consumed)
@@ -591,7 +632,14 @@ late [ BoxBlocker ] -> [ ]
 [ FruitConsumed ][ > Tail Active > Last ] -> [][ > Tail Active stationary Last ]
 [ > Snake stationary Active ] -> [ > Snake > Active ]
 
+(only move directions if move wasn't made by player)
 
+[ CanMove ][ > Snake stationary Direction no Active ] -> [ CanMove ][ > Snake > Direction ]
+[ stationary Player ][ > Snake stationary Direction ] -> [ stationary Player ][ > Snake > Direction ]
+
+(remove direction from last part if snake isn't growing)
+
+[ CanMove ][ > Tail Active > Last Direction ] -> [ CanMove ][ > Tail Active > Last ]
 
 (======Post-Movement======)
 
@@ -603,33 +651,15 @@ late [ FruitConsumed ] -> [ ]
 
 (create new snake part)
 
-late [ Active RedSnake ][ Last no Snake ] -> [ Active RedSnake ][ Last RedTail1 ]
-late [ Active GreenSnake ][ Last no Snake ] -> [ Active GreenSnake ][ Last GreenTail1 ]
-late [ Active BlueSnake ][ Last no Snake ] -> [ Active BlueSnake ][ Last BlueTail1 ]
+late [ Active RedSnake ][ Last no Snake | RedTail1 ] -> [ Active RedSnake ][ Last RedTail2 Active | RedTail1 ]
+late [ Active RedSnake ][ Last no Snake | RedTail2 ] -> [ Active RedSnake ][ Last RedTail1 Active | RedTail2 ]
 
-(assign number to new snake part after fruit consumption)
+late [ Active GreenSnake ][ Last no Snake | GreenTail1 ] -> [ Active GreenSnake ][ Last GreenTail2 Active | GreenTail1 ]
+late [ Active GreenSnake ][ Last no Snake | GreenTail2 ] -> [ Active GreenSnake ][ Last GreenTail1 Active | GreenTail2 ]
 
-late [ RedTail 05 | Last RedTail no Number ] -> message Length limit exceeded! Bugs are imminent!
-late [ GreenTail 05 | Last GreenTail no Number ] -> message Length limit exceeded! Bugs are imminent!
-late [ BlueTail 05 | Last BlueTail no Number ] -> message Length limit exceeded! Bugs are imminent!
+late [ Active BlueSnake ][ Last no Snake | BlueTail1 ] -> [ Active BlueSnake ][ Last BlueTail2 Active | BlueTail1 ]
+late [ Active BlueSnake ][ Last no Snake | BlueTail2 ] -> [ Active BlueSnake ][ Last BlueTail1 Active | BlueTail2 ]
 
-late [ RedTail 04 | Last RedTail no Number ] -> [ RedTail 04 | Last RedTail 05 ]
-late [ RedTail 03 | Last RedTail no Number ] -> [ RedTail 03 | Last RedTail 04 ]
-late [ RedTail 02 | Last RedTail no Number ] -> [ RedTail 02 | Last RedTail 03 ]
-late [ RedTail 01 | Last RedTail no Number ] -> [ RedTail 01 | Last RedTail 02 ]
-late [ RedHead | Last RedTail no Number ] -> [ RedHead | Last RedTail 01 ]
-
-late [ GreenTail 04 | Last GreenTail no Number ] -> [ GreenTail 04 | Last GreenTail 05 ]
-late [ GreenTail 03 | Last GreenTail no Number ] -> [ GreenTail 03 | Last GreenTail 04 ]
-late [ GreenTail 02 | Last GreenTail no Number ] -> [ GreenTail 02 | Last GreenTail 03 ]
-late [ GreenTail 01 | Last GreenTail no Number ] -> [ GreenTail 01 | Last GreenTail 02 ]
-late [ GreenHead | Last GreenTail no Number ] -> [ GreenHead | Last GreenTail 01 ]
-
-late [ BlueTail 04 | Last BlueTail no Number ] -> [ BlueTail 04 | Last BlueTail 05 ]
-late [ BlueTail 03 | Last BlueTail no Number ] -> [ BlueTail 03 | Last BlueTail 04 ]
-late [ BlueTail 02 | Last BlueTail no Number ] -> [ BlueTail 02 | Last BlueTail 03 ]
-late [ BlueTail 01 | Last BlueTail no Number ] -> [ BlueTail 01 | Last BlueTail 02 ]
-late [ BlueHead | Last BlueTail no Number ] -> [ BlueHead | Last BlueTail 01 ]
 
 (snakes die when touching water and spikes)
 
@@ -684,31 +714,16 @@ late [ BlueHead Exit ][ BlueSnake no Exit ] -> [ BlueHead Exit ][ ]
 late [ Head Exit ][ SnakeCounter 01 ] -> [ Head Exit ][ SnakeCounter 00 ]
 late [ Head Exit ][ SnakeCounter 02 ] -> [ Head Exit ][ SnakeCounter 01 ]
 late [ Head Exit ][ SnakeCounter 03 ] -> [ Head Exit ][ SnakeCounter 02 ]
+
+late [ Head Exit ][ Last no Snake ] -> [ Head Exit ][ ]
+late [ Head Exit ][ Direction no Snake ] -> [ Head Exit ][ ]
+
 late [ Head Exit ] -> [ Exit ] sfx2
 
 (add eyes to active snake)
 
 late [ Eyes ] -> []
 late [ Active Head ] -> [ Active Head Eyes ]
-
-(make snakes stripey)
-
-late [ RedTail1 01 ] -> [ RedTail2 01 ]
-late [ RedTail1 03 ] -> [ RedTail2 03 ]
-late [ RedTail1 05 ] -> [ RedTail2 05 ]
-
-late [ GreenTail1 01 ] -> [ GreenTail2 01 ]
-late [ GreenTail1 03 ] -> [ GreenTail2 03 ]
-late [ GreenTail1 05 ] -> [ GreenTail2 05 ]
-
-late [ BlueTail1 01 ] -> [ BlueTail2 01 ]
-late [ BlueTail1 03 ] -> [ BlueTail2 03 ]
-late [ BlueTail1 05 ] -> [ BlueTail2 05 ]
-
-(remove hint arrows from consumed fruits)
-
-down [ Arrow | no Fruit ] -> [  |  ]
-
 
 ==============
 WINCONDITIONS
@@ -736,9 +751,9 @@ LEVELS
 ......................#########......##...
 .....................#########.......##...
 .....................■□□■...##........##..
-.....................#..■..8#.........##..
-.................12..#.#■..8#.........##..
-.........54......●●..#.#■.78#........###..
+.....................#..■..↓#.........##..
+.................1←..#.#■..↓#.........##..
+.........→2......●●..#.#■.3←#........###..
 ......######..########.##.###........##...
 ........####..###########............##...
 ..........##***##########............##...
