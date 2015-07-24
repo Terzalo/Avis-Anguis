@@ -168,6 +168,33 @@ lightgreen red
 .1111
 ..11.
 
+PortalClosed
+lightgray
+.....
+..0..
+.000.
+..0..
+.....
+
+PortalOpen
+transparent
+
+Portal1
+yellow orange
+.111.
+11011
+10001
+11011
+.111.
+
+Portal2
+lightblue blue
+.111.
+11011
+10001
+11011
+.111.
+
 Exit
 white red orange yellow lightgreen blue purple
 .112.
@@ -188,6 +215,22 @@ white red lightgreen blue purple
 .402.
 ..3..
 .....
+
+TeleportOK
+white
+0.0.0
+.....
+0...0
+.....
+0.0.0
+
+TeleportBlocked
+white red
+1.0.1
+.1.1.
+0.1.0
+.1.1.
+1.0.1
 
 UndoHint1
 white black darkgray
@@ -312,6 +355,9 @@ transparent
 Temp2
 transparent
 
+Temp3
+transparent
+
 BoxBlocker
 transparent
 
@@ -342,6 +388,8 @@ LEGEND
 % = Bush
 ~ = Water
 
+x = Portal1 and PortalOpen
+y = Portal2 and PortalOpen
 E = ExitClosed
 
 b = Banana
@@ -367,12 +415,16 @@ Box = Box1 or Box2 or Box3
 
 Pushable = Snake or Box1Front or Box2Front or Box3Front
 
+Portal = Portal1 or Portal2
+
 Ground = Soil or Grass
 Hazard = Water or Spikes
 Fruit = Banana or Strawberry
 Solid = RedSnake or GreenSnake or BlueSnake or Box1Front or Box2Front or Box3Front or Ground or Fruit
 Number = 00 or 01 or 02 or 03 or 04 or 05
 Direction = North or South or West or East
+
+TeleportHint = TeleportOK or TeleportBlocked
 
 =======
 SOUNDS
@@ -391,6 +443,8 @@ COLLISIONLAYERS
 Background
 Direction
 Exit, ExitClosed
+PortalClosed, PortalOpen
+Portal1, Portal2
 Box1Back
 Box2Back
 Box3Back
@@ -399,6 +453,7 @@ Eyes
 Water, Spikes
 Bush
 UndoHint1, UndoHint2, UndoHint3, UndoHint4
+TeleportHint
 
 Player
 Number
@@ -409,6 +464,7 @@ FruitConsumed
 CanMove
 Temp
 Temp2
+Temp3
 
 ======
 RULES
@@ -489,6 +545,10 @@ up [ BlueTail1 Last | no Snake South ] -> [ BlueTail1 | BlueTail2 Last South ]
 (if there's an undo hint, then a snake is dead -- skip all moves until player presses undo)
 
 [ UndoHint1 ] -> cancel
+
+(remove teleport hints)
+
+[ moving Player ][ TeleportHint ] -> [ moving Player ][ ]
 
 (switch active snake)
 
@@ -641,6 +701,26 @@ late [ BoxBlocker ] -> [ ]
 
 [ CanMove ][ > Tail Active > Last Direction ] -> [ CanMove ][ > Tail Active > Last ]
 
+(open portals)
+
+random [ > RedSnake PortalClosed ][ no Snake PortalClosed ] -> [ > RedSnake PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > RedSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > RedSnake | PortalClosed ][ PortalClosed ]
+[ > RedSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > RedSnake | PortalClosed ][ PortalClosed ]
+
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ PortalOpen Portal1 ][ PortalOpen Portal2 ]
+
+random [ > GreenSnake PortalClosed ][ no Snake PortalClosed ] -> [ > GreenSnake PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > GreenSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > GreenSnake | PortalClosed ][ PortalClosed ]
+[ > GreenSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > GreenSnake | PortalClosed ][ PortalClosed ]
+
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ PortalOpen Portal1 ][ PortalOpen Portal2 ]
+
+random [ > BlueSnake PortalClosed ][ no Snake PortalClosed ] -> [ > BlueSnake PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > BlueSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > BlueSnake | PortalClosed ][ PortalClosed ]
+[ > BlueSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > BlueSnake | PortalClosed ][ PortalClosed ]
+
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ PortalOpen Portal1 ][ PortalOpen Portal2 ]
+
 (======Post-Movement======)
 
 (reset temporary objects)
@@ -660,6 +740,66 @@ late [ Active GreenSnake ][ Last no Snake | GreenTail2 ] -> [ Active GreenSnake 
 late [ Active BlueSnake ][ Last no Snake | BlueTail1 ] -> [ Active BlueSnake ][ Last BlueTail2 Active | BlueTail1 ]
 late [ Active BlueSnake ][ Last no Snake | BlueTail2 ] -> [ Active BlueSnake ][ Last BlueTail1 Active | BlueTail2 ]
 
+(teleport snakes)
+
+late [ Snake Portal2 PortalOpen ][ no Snake Portal1 PortalOpen ] -> [ Snake Portal1 PortalOpen ][ Portal2 PortalOpen ]
+
+startloop
+late [ RedSnake no Temp ][ RedSnake Portal1 PortalOpen no Temp3 ][ Portal2 ] -> [ RedSnake ][ RedSnake Portal1 PortalOpen Temp Temp3 ][ Portal2 Temp2 Temp3 ]
+late [ GreenSnake no Temp ][ GreenSnake Portal1 PortalOpen no Temp3 ][ Portal2 ] -> [ GreenSnake ][ GreenSnake Portal1 PortalOpen Temp Temp3 ][ Portal2 Temp2 Temp3 ]
+late [ BlueSnake no Temp ][ BlueSnake Portal1 PortalOpen no Temp3 ][ Portal2 ] -> [ BlueSnake ][ BlueSnake Portal1 PortalOpen Temp Temp3 ][ Portal2 Temp2 Temp3 ]
+
+late up [ Temp Temp3 North | Snake no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp North | Snake Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late down [ Temp Temp3 South | Snake no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp South | Snake Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late left [ Temp Temp3 West | Snake no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp West | Snake Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late right [ Temp Temp3 East | Snake no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp East | Snake Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
+
+late down [ Temp Temp3 | Snake North no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp | Snake North Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late up [ Temp Temp3 | Snake South no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp| Snake South Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late right [ Temp Temp3 | Snake West no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp | Snake West Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late left [ Temp Temp3 | Snake East no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp | Snake East Temp Temp3 ][ Temp2 | Temp2 Temp3 ] 
+
+late [ Temp3 ] -> [ ]
+endloop
+
+late [ Temp2 no Solid no Hazard ][ Player ] -> [ Temp2 TeleportOK ][ Player CanMove ]
+late [ Temp2 no TeleportOK ][ CanMove ] -> [ Temp2 TeleportBlocked ][ ]
+late [ Temp2 no TeleportOK ] -> [ Temp2 TeleportBlocked ]
+
+late [ CanMove ][ TeleportHint ] -> [ CanMove ][ ]
+
+startloop
+late [ CanMove ][ Temp2 no RedSnake ][ RedSnake Portal1 no Temp3 ][ Portal2 ] -> [ CanMove ][ Temp2 ][ RedSnake Portal1 Temp3 ][ RedSnake Portal2 Temp3 ]
+late [ CanMove ][ Temp2 no GreenSnake ][ GreenSnake Portal1 no Temp3 ][ Portal2 ] -> [ CanMove ][ Temp2 ][ GreenSnake Portal1 Temp3 ][ GreenSnake Portal2 Temp3 ]
+late [ CanMove ][ Temp2 no BlueSnake ][ BlueSnake Portal1 no Temp3 ][ Portal2 ] -> [ CanMove ][ Temp2 ][ BlueSnake Portal1 Temp3 ][ BlueSnake Portal2 Temp3 ]
+
+late [ CanMove ][ Temp Temp3 Last ][ Temp2 Temp3 ] -> [ CanMove ][ Temp Temp3 ][ Temp2 Temp3 Last ]
+
+late up [ CanMove ][ Temp Temp3 North | Snake Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 North | Snake Temp2 Temp3 ]
++ late down [ CanMove ][ Temp Temp3 South | Snake Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 South | Snake Temp2 Temp3 ]
++ late left [ CanMove ][ Temp Temp3 West | Snake Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 West | Snake Temp2 Temp3 ]
++ late right [ CanMove ][ Temp Temp3 East | Snake Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 East | Snake Temp2 Temp3 ]
+
+late down [ CanMove ][ Temp Temp3 | Snake North Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 | Snake North Temp2 Temp3 ]
++ late up [ CanMove ][ Temp Temp3 | Snake South Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 | Snake South Temp2 Temp3 ]
++ late right [ CanMove ][ Temp Temp3 | Snake West Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 | Snake West Temp2 Temp3 ]
++ late left [ CanMove ][ Temp Temp3 | Snake East Temp ][ Temp2 Temp3 | Temp2 ] -> [ CanMove ][ Temp | Temp Temp3 ][ Temp2 | Snake East Temp2 Temp3 ]
+
+late [ CanMove ][ Temp Temp3 Last ][ Temp2 Temp3 ] -> [ CanMove ][ Temp Temp3 ][ Temp2 Temp3 Last ]
+
+late [ CanMove ][ Temp3 ] -> [ CanMove ][ ]
+endloop
+
+late [ CanMove ][ Temp Active ][ Temp2 no Active ] -> [ CanMove ][ Temp ][ Temp2 Active ]
+
+late [ CanMove ][ Temp Snake ] -> [ CanMove ][ ]
+late [ CanMove ][ Temp Direction ] -> [ CanMove ][ ]
+
+late [ Snake PortalOpen ][ Portal1 PortalOpen ][ Portal2 PortalOpen ] -> [ Snake PortalClosed ][ PortalClosed ][ PortalClosed ]
+
+late [ CanMove ] -> [ ]
+late [ Temp ] -> [ ]
+late [ Temp2 ] -> [ ]
 
 (snakes die when touching water and spikes)
 
@@ -742,13 +882,13 @@ LEVELS
 ..........................................
 ..........................................
 ..........................................
-..........................................
-..........................................
-..........................b.....******....
-...............................*######....
-.........................▪w.....*#####....
-........................▪▪.......e..###...
-......................#########......##...
+........................▪.b.....******....
+........................▪......*######....
+........................▫.w..y..*#####....
+.......................▪▪........e..##....
+....................###########.....##....
+...................#x##########.....###...
+...................#.##########......##...
 .....................#########.......##...
 .....................■□□■...##........##..
 .....................#..■..↓#.........##..
