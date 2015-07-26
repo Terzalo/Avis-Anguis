@@ -438,11 +438,11 @@ COLLISIONLAYERS
 
 Background
 Direction
-Exit, ExitClosed
-PortalClosed, PortalOpen
 Box1Back
 Box2Back
 Box3Back
+Exit, ExitClosed
+PortalClosed, PortalOpen
 Solid, BoxBlocker
 Eyes
 Water, Spikes
@@ -725,21 +725,21 @@ random [ > BlueSnake PortalClosed ][ no Pushable PortalClosed ] -> [ > BlueSnake
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
-random [ > Box1 PortalClosed ][ no Pushable PortalClosed ] -> [ > Box1 PortalClosed Temp ][ PortalClosed Temp2 ]
-[ > Box1 | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box1 | PortalClosed ][ PortalClosed ]
-[ > Box1 | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box1 | PortalClosed ][ PortalClosed ]
+random [ > Box1Front PortalClosed ][ no Pushable PortalClosed ] -> [ > Box1Front PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > Box1Front | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box1Front | PortalClosed ][ PortalClosed ]
+[ > Box1Front | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box1Front | PortalClosed ][ PortalClosed ]
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
-random [ > Box2 PortalClosed ][ no Pushable PortalClosed ] -> [ > Box2 PortalClosed Temp ][ PortalClosed Temp2 ]
-[ > Box2 | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box2 | PortalClosed ][ PortalClosed ]
-[ > Box2 | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box2 | PortalClosed ][ PortalClosed ]
+random [ > Box2Front PortalClosed ][ no Pushable PortalClosed ] -> [ > Box2Front PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > Box2Front | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box2Front | PortalClosed ][ PortalClosed ]
+[ > Box2Front | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box2Front | PortalClosed ][ PortalClosed ]
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
-random [ > Box3 PortalClosed ][ no Pushable PortalClosed ] -> [ > Box3 PortalClosed Temp ][ PortalClosed Temp2 ]
-[ > Box3 | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box3 | PortalClosed ][ PortalClosed ]
-[ > Box3 | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box3 | PortalClosed ][ PortalClosed ]
+random [ > Box3Front PortalClosed ][ no Pushable PortalClosed ] -> [ > Box3Front PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > Box3Front | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box3Front | PortalClosed ][ PortalClosed ]
+[ > Box3Front | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box3Front | PortalClosed ][ PortalClosed ]
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
