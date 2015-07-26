@@ -705,21 +705,39 @@ late [ BoxBlocker ] -> [ ]
 
 (open portals)
 
-random [ > RedSnake PortalClosed ][ no Snake PortalClosed ] -> [ > RedSnake PortalClosed Temp ][ PortalClosed Temp2 ]
+random [ > RedSnake PortalClosed ][ no Pushable PortalClosed ] -> [ > RedSnake PortalClosed Temp ][ PortalClosed Temp2 ]
 [ > RedSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > RedSnake | PortalClosed ][ PortalClosed ]
 [ > RedSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > RedSnake | PortalClosed ][ PortalClosed ]
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
-random [ > GreenSnake PortalClosed ][ no Snake PortalClosed ] -> [ > GreenSnake PortalClosed Temp ][ PortalClosed Temp2 ]
+random [ > GreenSnake PortalClosed ][ no Pushable PortalClosed ] -> [ > GreenSnake PortalClosed Temp ][ PortalClosed Temp2 ]
 [ > GreenSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > GreenSnake | PortalClosed ][ PortalClosed ]
 [ > GreenSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > GreenSnake | PortalClosed ][ PortalClosed ]
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
-random [ > BlueSnake PortalClosed ][ no Snake PortalClosed ] -> [ > BlueSnake PortalClosed Temp ][ PortalClosed Temp2 ]
+random [ > BlueSnake PortalClosed ][ no Pushable PortalClosed ] -> [ > BlueSnake PortalClosed Temp ][ PortalClosed Temp2 ]
 [ > BlueSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > BlueSnake | PortalClosed ][ PortalClosed ]
 [ > BlueSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > BlueSnake | PortalClosed ][ PortalClosed ]
+
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
+
+random [ > Box1 PortalClosed ][ no Pushable PortalClosed ] -> [ > Box1 PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > Box1 | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box1 | PortalClosed ][ PortalClosed ]
+[ > Box1 | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box1 | PortalClosed ][ PortalClosed ]
+
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
+
+random [ > Box2 PortalClosed ][ no Pushable PortalClosed ] -> [ > Box2 PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > Box2 | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box2 | PortalClosed ][ PortalClosed ]
+[ > Box2 | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box2 | PortalClosed ][ PortalClosed ]
+
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
+
+random [ > Box3 PortalClosed ][ no Pushable PortalClosed ] -> [ > Box3 PortalClosed Temp ][ PortalClosed Temp2 ]
+[ > Box3 | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > Box3 | PortalClosed ][ PortalClosed ]
+[ > Box3 | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > Box3 | PortalClosed ][ PortalClosed ]
 
 [ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
@@ -744,7 +762,7 @@ late [ Active BlueSnake ][ Last no Snake | BlueTail2 ] -> [ Active BlueSnake ][ 
 
 (teleport snakes)
 
-late [ Snake Portal2 ][ no Snake Portal1 ] -> [ Snake Portal1 ][ Portal2 ]
+late [ Pushable Portal2 ][ no Pushable Portal1 ] -> [ Pushable Portal1 ][ Portal2 ]
 
 startloop
 late [ RedSnake no Temp ][ RedSnake Portal1 no Temp3 ][ Portal2 ] -> [ RedSnake ][ RedSnake Portal1 Temp Temp3 ][ Portal2 Temp2 Temp3 ]
@@ -797,7 +815,7 @@ late [ CanMove ][ Temp Active ][ Temp2 no Active ] -> [ CanMove ][ Temp ][ Temp2
 late [ CanMove ][ Temp Snake ] -> [ CanMove ][ ]
 late [ CanMove ][ Temp Direction ] -> [ CanMove ][ ]
 
-late [ Snake PortalOpen ][ Portal1 ][ Portal2 ] -> [ Snake PortalClosed ][ PortalClosed ][ PortalClosed ]
+late [ Pushable PortalOpen ][ Portal1 ][ Portal2 ] -> [ Pushable PortalClosed ][ PortalClosed ][ PortalClosed ]
 
 late [ CanMove ] -> [ ]
 late [ Temp ] -> [ ]
