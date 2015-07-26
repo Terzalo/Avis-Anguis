@@ -620,9 +620,9 @@ endloop
 
 (late-check if head of active snake moved at all)
 
-[ CanMove ][ Active > Head ] -> [ CanMove ][ Active > Head Temp ]
-late [ Active Head Temp ] -> cancel
-late [ Temp ] -> [ ]
+[ CanMove ][ Active > Head ] -> [ CanMove ][ Active > Head Temp3 ]
+late [ Active Head Temp3 ] -> cancel
+late [ Temp3 ] -> [ ]
 
 (don't let snakes move into themselves)
 
