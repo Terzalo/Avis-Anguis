@@ -176,9 +176,6 @@ lightgray
 ..0..
 .....
 
-PortalOpen
-transparent
-
 Portal1
 yellow orange
 .111.
@@ -188,7 +185,7 @@ yellow orange
 .111.
 
 Portal2
-lightblue blue
+yellow orange
 .111.
 11011
 10001
@@ -388,8 +385,7 @@ LEGEND
 % = Bush
 ~ = Water
 
-x = Portal1 and PortalOpen
-y = Portal2 and PortalOpen
+p = Portal1
 E = ExitClosed
 
 b = Banana
@@ -415,7 +411,7 @@ Box = Box1 or Box2 or Box3
 
 Pushable = Snake or Box1Front or Box2Front or Box3Front
 
-Portal = Portal1 or Portal2
+PortalOpen = Portal1 or Portal2
 
 Ground = Soil or Grass
 Hazard = Water or Spikes
@@ -444,7 +440,6 @@ Background
 Direction
 Exit, ExitClosed
 PortalClosed, PortalOpen
-Portal1, Portal2
 Box1Back
 Box2Back
 Box3Back
@@ -477,6 +472,13 @@ RULES
 random [ ] -> [ Temp ]
 [ Player ][ Temp ] -> [ Player ][ ]
 [ Soil ][ Temp ] -> [ Soil Player SnakeCounter ][ ]
+
+(turn second Portal1 into Portal2)
+
+random [ Portal1 ] -> [ Portal1 Temp ]
+random [ Portal1 no Temp ] -> [ Portal2 ]
+[ Portal1 no Temp ] -> [ ]
+[ Portal1 Temp ] -> [ Portal1 ]
 
 (plant grass for fancy look)
 
@@ -707,19 +709,19 @@ random [ > RedSnake PortalClosed ][ no Snake PortalClosed ] -> [ > RedSnake Port
 [ > RedSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > RedSnake | PortalClosed ][ PortalClosed ]
 [ > RedSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > RedSnake | PortalClosed ][ PortalClosed ]
 
-[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ PortalOpen Portal1 ][ PortalOpen Portal2 ]
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
 random [ > GreenSnake PortalClosed ][ no Snake PortalClosed ] -> [ > GreenSnake PortalClosed Temp ][ PortalClosed Temp2 ]
 [ > GreenSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > GreenSnake | PortalClosed ][ PortalClosed ]
 [ > GreenSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > GreenSnake | PortalClosed ][ PortalClosed ]
 
-[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ PortalOpen Portal1 ][ PortalOpen Portal2 ]
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
 random [ > BlueSnake PortalClosed ][ no Snake PortalClosed ] -> [ > BlueSnake PortalClosed Temp ][ PortalClosed Temp2 ]
 [ > BlueSnake | PortalClosed Temp ][ PortalClosed Temp2 ] -> [ > BlueSnake | PortalClosed ][ PortalClosed ]
 [ > BlueSnake | PortalClosed Temp2 ][ PortalClosed Temp ] -> [ > BlueSnake | PortalClosed ][ PortalClosed ]
 
-[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ PortalOpen Portal1 ][ PortalOpen Portal2 ]
+[ PortalClosed Temp ][ PortalClosed Temp2 ] -> [ Portal1 ][ Portal2 ]
 
 (======Post-Movement======)
 
@@ -742,12 +744,12 @@ late [ Active BlueSnake ][ Last no Snake | BlueTail2 ] -> [ Active BlueSnake ][ 
 
 (teleport snakes)
 
-late [ Snake Portal2 PortalOpen ][ no Snake Portal1 PortalOpen ] -> [ Snake Portal1 PortalOpen ][ Portal2 PortalOpen ]
+late [ Snake Portal2 ][ no Snake Portal1 ] -> [ Snake Portal1 ][ Portal2 ]
 
 startloop
-late [ RedSnake no Temp ][ RedSnake Portal1 PortalOpen no Temp3 ][ Portal2 ] -> [ RedSnake ][ RedSnake Portal1 PortalOpen Temp Temp3 ][ Portal2 Temp2 Temp3 ]
-late [ GreenSnake no Temp ][ GreenSnake Portal1 PortalOpen no Temp3 ][ Portal2 ] -> [ GreenSnake ][ GreenSnake Portal1 PortalOpen Temp Temp3 ][ Portal2 Temp2 Temp3 ]
-late [ BlueSnake no Temp ][ BlueSnake Portal1 PortalOpen no Temp3 ][ Portal2 ] -> [ BlueSnake ][ BlueSnake Portal1 PortalOpen Temp Temp3 ][ Portal2 Temp2 Temp3 ]
+late [ RedSnake no Temp ][ RedSnake Portal1 no Temp3 ][ Portal2 ] -> [ RedSnake ][ RedSnake Portal1 Temp Temp3 ][ Portal2 Temp2 Temp3 ]
+late [ GreenSnake no Temp ][ GreenSnake Portal1 no Temp3 ][ Portal2 ] -> [ GreenSnake ][ GreenSnake Portal1 Temp Temp3 ][ Portal2 Temp2 Temp3 ]
+late [ BlueSnake no Temp ][ BlueSnake Portal1 no Temp3 ][ Portal2 ] -> [ BlueSnake ][ BlueSnake Portal1 Temp Temp3 ][ Portal2 Temp2 Temp3 ]
 
 late up [ Temp Temp3 North | Snake no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp North | Snake Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
 + late down [ Temp Temp3 South | Snake no Temp ][ Temp2 Temp3 | no Temp2 ] -> [ Temp South | Snake Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
@@ -795,7 +797,7 @@ late [ CanMove ][ Temp Active ][ Temp2 no Active ] -> [ CanMove ][ Temp ][ Temp2
 late [ CanMove ][ Temp Snake ] -> [ CanMove ][ ]
 late [ CanMove ][ Temp Direction ] -> [ CanMove ][ ]
 
-late [ Snake PortalOpen ][ Portal1 PortalOpen ][ Portal2 PortalOpen ] -> [ Snake PortalClosed ][ PortalClosed ][ PortalClosed ]
+late [ Snake PortalOpen ][ Portal1 ][ Portal2 ] -> [ Snake PortalClosed ][ PortalClosed ][ PortalClosed ]
 
 late [ CanMove ] -> [ ]
 late [ Temp ] -> [ ]
@@ -884,10 +886,10 @@ LEVELS
 ..........................................
 ........................▪.b.....******....
 ........................▪......*######....
-........................▫.w..y..*#####....
+........................▫.w..p..*#####....
 .......................▪▪........e..##....
 ....................###########.....##....
-...................#x##########.....###...
+...................#p##########.....###...
 ...................#.##########......##...
 .....................#########.......##...
 .....................■□□■...##........##..
