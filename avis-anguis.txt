@@ -875,10 +875,12 @@ late [ Head Exit ][ SnakeCounter 01 ] -> [ Head Exit ][ SnakeCounter 00 ]
 late [ Head Exit ][ SnakeCounter 02 ] -> [ Head Exit ][ SnakeCounter 01 ]
 late [ Head Exit ][ SnakeCounter 03 ] -> [ Head Exit ][ SnakeCounter 02 ]
 
-late [ Head Exit ][ Last no Snake ] -> [ Head Exit ][ ]
-late [ Head Exit ][ Direction no Snake ] -> [ Head Exit ][ ]
-
 late [ Head Exit ] -> [ Exit ] sfx2
+
+(remove snakeless directions and last marks)
+
+late [ Direction no Snake ] -> [ ]
+late [ Last no Snake ] -> [ ]
 
 (add eyes to active snake)
 
