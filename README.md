@@ -8,7 +8,7 @@ There's just one demo level for the time being.
 Differences with Snakebird mechanics:
 
 - Limited number of movable boxes (up to 3, increasable)
-- Teleporter doesn't work on boxes.
+- Teleporter doesn't work on boxes yet.
 - You have to manually undo last move if a snake died.
 - Useless "jumps" straight upward are not discarded from history.
 
@@ -57,5 +57,6 @@ Other things to consider while building a level:
 - Don't use one box type to create multiple boxes, this will break gravity.
 - Sometimes you'll want to place something on top of "background" box tile, but the editor allows only one object per tile. The game will try to fill holes in "background" box tiles, but it will need at least one such tile to be visible. Sometimes this may result in unwanted background tiles.
 - While more than one exit per level should probably work, I did not test it. Proceed with caution.
+- Only two portals per level allowed. The game will just ignore any excess portals.
 
 Thank you!
