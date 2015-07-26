@@ -487,6 +487,8 @@ down [ no Ground | Soil ] -> [  | Grass ]
 (fill holes in background boxes)
 
 [ Box1Back | no Box1 | ... | Box1 ] -> [ Box1Back | Box1Back | ... | Box1 ]
+[ Box2Back | no Box2 | ... | Box2 ] -> [ Box2Back | Box2Back | ... | Box2 ]
+[ Box3Back | no Box3 | ... | Box3 ] -> [ Box3Back | Box3Back | ... | Box3 ]
 
 (set snake counter -- late because it uses Active)
 
