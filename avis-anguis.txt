@@ -408,6 +408,8 @@ Box1 = Box1Front or Box1Back
 Box2 = Box2Front or Box2Back
 Box3 = Box3Front or Box3Back
 Box = Box1 or Box2 or Box3
+BoxFront = Box1Front or Box2Front or Box3Front
+BoxBack = Box1Back or Box2Back or Box3Back
 
 Pushable = Snake or Box1Front or Box2Front or Box3Front
 
@@ -817,11 +819,89 @@ late [ CanMove ][ Temp Active ][ Temp2 no Active ] -> [ CanMove ][ Temp ][ Temp2
 late [ CanMove ][ Temp Snake ] -> [ CanMove ][ ]
 late [ CanMove ][ Temp Direction ] -> [ CanMove ][ ]
 
-late [ Pushable PortalOpen ][ Portal1 ][ Portal2 ] -> [ Pushable PortalClosed ][ PortalClosed ][ PortalClosed ]
+late [ CanMove ] -> [ ]
+late [ Temp ] -> [ ]
+late [ Temp2 ] -> [ ]
+
+(teleport boxes)
+
+late down [ Box1Front Portal1 | Box1 no Direction ] -> [ Box1Front Portal1 | Box1 North ]
++ late up [ Box1Front Portal1 | Box1 no Direction ] -> [ Box1Front Portal1 | Box1 South ]
++ late right [ Box1Front Portal1 | Box1 no Direction ] -> [ Box1Front Portal1 | Box1 West ]
++ late left [ Box1Front Portal1 | Box1 no Direction ] -> [ Box1Front Portal1 | Box1 East ]
+
+late down [ Box1Front Portal1 ][ Box1 Direction | Box1 no Direction no Portal1 ] -> [ Box1Front Portal1 ][ Box1 Direction | Box1 North ]
++ late up [ Box1Front Portal1 ][ Box1 Direction | Box1 no Direction no Portal1 ] -> [ Box1Front Portal1 ][ Box1 Direction | Box1 South ]
++ late right [ Box1Front Portal1 ][ Box1 Direction | Box1 no Direction no Portal1 ] -> [ Box1Front Portal1 ][ Box1 Direction | Box1 West ]
++ late left [ Box1Front Portal1 ][ Box1 Direction | Box1 no Direction no Portal1 ] -> [ Box1Front Portal1 ][ Box1 Direction | Box1 East ]
+
+
+late down [ Box2Front Portal1 | Box2 no Direction ] -> [ Box2Front Portal1 | Box2 North ]
++ late up [ Box2Front Portal1 | Box2 no Direction ] -> [ Box2Front Portal1 | Box2 South ]
++ late right [ Box2Front Portal1 | Box2 no Direction ] -> [ Box2Front Portal1 | Box2 West ]
++ late left [ Box2Front Portal1 | Box2 no Direction ] -> [ Box2Front Portal1 | Box2 East ]
+
+late down [ Box2Front Portal1 ][ Box2 Direction | Box2 no Direction no Portal1 ] -> [ Box2Front Portal1 ][ Box2 Direction | Box2 North ]
++ late up [ Box2Front Portal1 ][ Box2 Direction | Box2 no Direction no Portal1 ] -> [ Box2Front Portal1 ][ Box2 Direction | Box2 South ]
++ late right [ Box2Front Portal1 ][ Box2 Direction | Box2 no Direction no Portal1 ] -> [ Box2Front Portal1 ][ Box2 Direction | Box2 West ]
++ late left [ Box2Front Portal1 ][ Box2 Direction | Box2 no Direction no Portal1 ] -> [ Box2Front Portal1 ][ Box2 Direction | Box2 East ]
+
+
+late down [ Box3Front Portal1 | Box3 no Direction ] -> [ Box3Front Portal1 | Box3 North ]
++ late up [ Box3Front Portal1 | Box3 no Direction ] -> [ Box3Front Portal1 | Box3 South ]
++ late right [ Box3Front Portal1 | Box3 no Direction ] -> [ Box3Front Portal1 | Box3 West ]
++ late left [ Box3Front Portal1 | Box3 no Direction ] -> [ Box3Front Portal1 | Box3 East ]
+
+late down [ Box3Front Portal1 ][ Box3 Direction | Box3 no Direction no Portal1 ] -> [ Box3Front Portal1 ][ Box3 Direction | Box3 North ]
++ late up [ Box3Front Portal1 ][ Box3 Direction | Box3 no Direction no Portal1 ] -> [ Box3Front Portal1 ][ Box3 Direction | Box3 South ]
++ late right [ Box3Front Portal1 ][ Box3 Direction | Box3 no Direction no Portal1 ] -> [ Box3Front Portal1 ][ Box3 Direction | Box3 West ]
++ late left [ Box3Front Portal1 ][ Box3 Direction | Box3 no Direction no Portal1 ] -> [ Box3Front Portal1 ][ Box3 Direction | Box3 East ]
+
+random late [ BoxFront Portal1 ][ Portal2 ] -> [ BoxFront Portal1 Temp ][ Portal2 Temp2 TeleportOK ]
+
+startloop
+random late [ Box1 no Temp ][ Box1Front Portal1 ][ Portal2 ] -> [ Box1 ][ Box1Front Portal1 Temp3 ][ Portal2 Temp3 ]
+random late [ Box2 no Temp ][ Box2Front Portal1 ][ Portal2 ] -> [ Box2 ][ Box2Front Portal1 Temp3 ][ Portal2 Temp3 ]
+random late [ Box3 no Temp ][ Box3Front Portal1 ][ Portal2 ] -> [ Box3 ][ Box3Front Portal1 Temp3 ][ Portal2 Temp3 ]
+
+late down [ Box Temp Temp3 | BoxFront North ][ Temp2 Temp3 |  ]  -> [ Box Temp | BoxFront North Temp Temp3 ][ Temp2 | Temp2 Temp3 TeleportOK ]
++ late up [ Box Temp Temp3 | BoxFront South ][ Temp2 Temp3 |  ] -> [ Box Temp | BoxFront South Temp Temp3 ][ Temp2 | Temp2 Temp3 TeleportOK ]
++ late right [ Box Temp Temp3 | BoxFront West ][ Temp2 Temp3 |  ] -> [ Box Temp | BoxFront West Temp Temp3 ][ Temp2 | Temp2 Temp3 TeleportOK ]
++ late left [ Box Temp Temp3 | BoxFront East ][ Temp2 Temp3 |  ] -> [ Box Temp | BoxFront East Temp Temp3 ][ Temp2 | Temp2 Temp3 TeleportOK ]
+
++ late down [ Box Temp Temp3 | BoxBack North ][ Temp2 Temp3 |  ]  -> [ Box Temp | BoxBack North Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late up [ Box Temp Temp3 | BoxBack South ][ Temp2 Temp3 |  ] -> [ Box Temp | BoxBack South Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late right [ Box Temp Temp3 | BoxBack West ][ Temp2 Temp3 |  ] -> [ Box Temp | BoxBack West Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
++ late left [ Box Temp Temp3 | BoxBack East ][ Temp2 Temp3 |  ] -> [ Box Temp | BoxBack East Temp Temp3 ][ Temp2 | Temp2 Temp3 ]
+
+late [ Temp Temp3 Direction ][ Temp2 Temp3 ] -> [ Temp ][ Temp2 ]
+endloop
+
+late random [ Player ] -> [ Player CanMove ]
+late [ Temp2 TeleportOK Solid ] -> [ Temp2 TeleportBlocked Solid ]
+late [ Temp2 TeleportOK Hazard ] -> [ Temp2 TeleportBlocked Hazard ]
+late random [ Temp2 TeleportBlocked ][ CanMove ] -> [ Temp2 TeleportBlocked ][ ]
+
+late [ CanMove ][ Portal1 Box1Front ][ Temp2 TeleportOK ] -> [ CanMove ][ Portal1 Box1Front ][ Box1Front ]
+late [ CanMove ][ Portal1 Box1Front ][ Temp2 no TeleportOK ] -> [ CanMove ][ Portal1 Box1Front ][ Box1Back ]
+
+late [ CanMove ][ Portal1 Box2Front ][ Temp2 TeleportOK ] -> [ CanMove ][ Portal1 Box2Front ][ Box2Front ]
+late [ CanMove ][ Portal1 Box2Front ][ Temp2 no TeleportOK ] -> [ CanMove ][ Portal1 Box2Front ][ Box2Back ]
+
+late [ CanMove ][ Portal1 Box3Front ][ Temp2 TeleportOK ] -> [ CanMove ][ Portal1 Box3Front ][ Box3Front ]
+late [ CanMove ][ Portal1 Box3Front ][ Temp2 no TeleportOK ] -> [ CanMove ][ Portal1 Box3Front ][ Box3Back ]
+
+late [ CanMove ][ Temp Direction ] -> [ CanMove ][ Temp ]
+late [ CanMove ][ Portal1 Box1Front ][ Temp no Portal1 Box1 ] -> [ CanMove ][ Portal1 Box1Front ][ ]
+late [ CanMove ][ Portal1 Box2Front ][ Temp no Portal1 Box2 ] -> [ CanMove ][ Portal1 Box2Front ][ ]
+late [ CanMove ][ Portal1 Box3Front ][ Temp no Portal1 Box3 ] -> [ CanMove ][ Portal1 Box3Front ][ ]
+late [ CanMove ][ Portal1 BoxFront ] -> [ CanMove ][ Portal1 ]
 
 late [ CanMove ] -> [ ]
 late [ Temp ] -> [ ]
 late [ Temp2 ] -> [ ]
+
+late [ Pushable PortalOpen ][ Portal1 ][ Portal2 ] -> [ Pushable PortalClosed ][ PortalClosed ][ PortalClosed ]
 
 (snakes die when touching water and spikes)
 
