@@ -11,8 +11,11 @@ verbose_logging
 OBJECTS
 ========
 
-Background
+BackgroundSky
 #44aadd
+
+BackgroundSoil
+#665747
 
 RedHead
 red white yellow
@@ -362,7 +365,8 @@ transparent
 LEGEND
 =======
 
-. = Background
+. = BackgroundSky
+, = BackgroundSoil
 
 1 = RedHead
 2 = GreenHead
@@ -390,6 +394,8 @@ E = ExitClosed
 
 b = Banana
 w = Strawberry
+
+Background = BackgroundSky or BackgroundSoil
 
 RedTail = RedTail1 or RedTail2
 RedSnake = RedHead or RedTail
