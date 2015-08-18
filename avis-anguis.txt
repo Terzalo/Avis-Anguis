@@ -12,52 +12,52 @@ OBJECTS
 ========
 
 BackgroundSky
-#44aadd
+#42b9ff
 
 BackgroundSoil
-#665747
+#705730
 
 RedHead
-red white yellow
+#d61212 #ffe033
 00000
 00000
-00200
-00220
+00100
+00110
 00000
 
 RedTail1
-red
+#d61212
 
 RedTail2
-lightred
+#eb4c4c
 
 GreenHead
-green white yellow
+#33830b #ffe033
 00000
 00000
-00200
-00220
+00100
+00110
 00000
 
 GreenTail1
-green
+#33830b
 
 GreenTail2
-lightgreen
+#48a619
 
 BlueHead
-blue white yellow
+#302cf7 #ffe033
 00000
 00000
-00200
-00220
+00100
+00110
 00000
 
 BlueTail1
-blue
+#302cf7
 
 BlueTail2
-#0088ff
+#3868f2
 
 Eyes
 white
@@ -68,79 +68,66 @@ white
 .....
 
 Box1Front
-yellow 
+#ffea77 #8d834d
 00000
-0...0
-0...0
-0...0
+01110
+01.10
+01110
 00000
 
 Box1Back
-#ccbb58
-00000
-0...0
-0...0
-0...0
-00000
+#8d834d
+.....
+.000.
+.0.0.
+.000.
+.....
 
 Box2Front
-lightblue 
+#c9f3ff #38869c
 00000
-0...0
-0...0
-0...0
+01110
+01.10
+01110
 00000
 
 Box2Back
-#97bbcc
-00000
-0...0
-0...0
-0...0
-00000
+#38869c
+.....
+.000.
+.0.0.
+.000.
+.....
 
 Box3Front
-orange 
+#d3d4ff #686b96
 00000
-0...0
-0...0
-0...0
+01110
+01.10
+01110
 00000
 
 Box3Back
-#cc762b
-00000
-0...0
-0...0
-0...0
-00000
+#686b96
+.....
+.000.
+.0.0.
+.000.
+.....
 
 Soil
-brown
-00000
-00000
-00000
-00000
-00000
+#99753d
 
 Grass
-brown lightgreen
+#99753d #abff34
 11111
 01101
 00000
 00000
 00000
 
-Bush
-lightgreen
-.0.0.
-00000
-.000.
-00000
-.000.
-
 Water
-#77eeee blue
+#cdfeff #3572b0
 00000
 11111
 11111
@@ -148,7 +135,7 @@ Water
 11111
 
 Spikes
-lightgray darkgrey
+#ededed #706e6d
 .0.0.
 01110
 .101.
@@ -156,7 +143,7 @@ lightgray darkgrey
 .0.0.
 
 Banana
-lightgreen yellow
+#abff34 #fcfa2b
 ....0
 11111
 ..111
@@ -164,7 +151,7 @@ lightgreen yellow
 ..11.
 
 Strawberry
-lightgreen red
+#abff34 #fc2b2b
 .00..
 0011.
 01111
@@ -172,7 +159,7 @@ lightgreen red
 ..11.
 
 PortalClosed
-lightgray
+#ededed
 .....
 ..0..
 .000.
@@ -180,36 +167,31 @@ lightgray
 .....
 
 Portal1
-yellow orange
+#ffebfe #ff8043 #ffcdb6 
 .111.
-11011
+12021
 10001
-11011
+12021
 .111.
 
 Portal2
-yellow orange
+#ffebfe #ff8043 #ffcdb6 
 .111.
-11011
+12021
 10001
-11011
+12021
 .111.
 
 Exit
-white red orange yellow lightgreen blue purple
-.112.
+white #fc2b2b #ff9d34 #fcfa2b #91dc00 #0066ff #ff43f4
+.611.
 60002
-60003
+50002
 50003
-.544.
-(.011.
-00014
-20144
-22343
-.233.)
+.443.
 
 ExitClosed
-white red lightgreen blue purple
+white #fc2b2b #91dc00 #0066ff #ff43f4
 .....
 ..1..
 .402.
@@ -225,7 +207,7 @@ white
 0.0.0
 
 TeleportBlocked
-white red
+white #b60000
 1.0.1
 .1.1.
 0.1.0
@@ -386,7 +368,6 @@ LEGEND
 
 # = Soil
 * = Spikes
-% = Bush
 ~ = Water
 
 p = Portal1
@@ -454,7 +435,6 @@ PortalClosed, PortalOpen
 Solid, BoxBlocker
 Eyes
 Water, Spikes
-Bush
 UndoHint1, UndoHint2, UndoHint3, UndoHint4
 TeleportHint
 
