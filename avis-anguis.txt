@@ -31,6 +31,70 @@ RedTail1
 RedTail2
 #eb4c4c
 
+RedOverN1
+#d61212
+.000.
+.....
+.....
+.....
+.....
+
+RedOverS1
+#d61212
+.....
+.....
+.....
+.....
+.000.
+
+RedOverW1
+#d61212
+.....
+0....
+0....
+0....
+.....
+
+RedOverE1
+#d61212
+.....
+....0
+....0
+....0
+.....
+
+RedOverN2
+#eb4c4c
+.000.
+.....
+.....
+.....
+.....
+
+RedOverS2
+#eb4c4c
+.....
+.....
+.....
+.....
+.000.
+
+RedOverW2
+#eb4c4c
+.....
+0....
+0....
+0....
+.....
+
+RedOverE2
+#eb4c4c
+.....
+....0
+....0
+....0
+.....
+
 GreenHead
 #33830b #ffe033
 00000
@@ -45,6 +109,70 @@ GreenTail1
 GreenTail2
 #48a619
 
+GreenOverN1
+#33830b
+.000.
+.....
+.....
+.....
+.....
+
+GreenOverS1
+#33830b
+.....
+.....
+.....
+.....
+.000.
+
+GreenOverW1
+#33830b
+.....
+0....
+0....
+0....
+.....
+
+GreenOverE1
+#33830b
+.....
+....0
+....0
+....0
+.....
+
+GreenOverN2
+#48a619
+.000.
+.....
+.....
+.....
+.....
+
+GreenOverS2
+#48a619
+.....
+.....
+.....
+.....
+.000.
+
+GreenOverW2
+#48a619
+.....
+0....
+0....
+0....
+.....
+
+GreenOverE2
+#48a619
+.....
+....0
+....0
+....0
+.....
+
 BlueHead
 #302cf7 #ffe033
 00000
@@ -58,6 +186,70 @@ BlueTail1
 
 BlueTail2
 #3868f2
+
+BlueOverN1
+#302cf7
+.000.
+.....
+.....
+.....
+.....
+
+BlueOverS1
+#302cf7
+.....
+.....
+.....
+.....
+.000.
+
+BlueOverW1
+#302cf7
+.....
+0....
+0....
+0....
+.....
+
+BlueOverE1
+#302cf7
+.....
+....0
+....0
+....0
+.....
+
+BlueOverN2
+#3868f2
+.000.
+.....
+.....
+.....
+.....
+
+BlueOverS2
+#3868f2
+.....
+.....
+.....
+.....
+.000.
+
+BlueOverW2
+#3868f2
+.....
+0....
+0....
+0....
+.....
+
+BlueOverE2
+#3868f2
+.....
+....0
+....0
+....0
+.....
 
 Eyes
 white
@@ -83,6 +275,22 @@ Box1Back
 .000.
 .....
 
+Box1BackH
+#8d834d
+.....
+0...0
+.....
+0...0
+.....
+
+Box1BackV
+#8d834d
+.0.0.
+.....
+.....
+.....
+.0.0.
+
 Box2Front
 #c9f3ff #38869c
 00000
@@ -99,6 +307,22 @@ Box2Back
 .000.
 .....
 
+Box2BackH
+#38869c
+.....
+0...0
+.....
+0...0
+.....
+
+Box2BackV
+#38869c
+.0.0.
+.....
+.....
+.....
+.0.0.
+
 Box3Front
 #d3d4ff #686b96
 00000
@@ -114,6 +338,22 @@ Box3Back
 .0.0.
 .000.
 .....
+
+Box3BackH
+#686b96
+.....
+0...0
+.....
+0...0
+.....
+
+Box3BackV
+#686b96
+.0.0.
+.....
+.....
+.....
+.0.0.
 
 Soil
 #99753d
@@ -343,6 +583,71 @@ transparent
 BoxBlocker
 transparent
 
+CornerNW
+#42b9ff
+0....
+.....
+.....
+.....
+.....
+
+CornerNE
+#42b9ff
+....0
+.....
+.....
+.....
+.....
+
+CornerSW
+#42b9ff
+.....
+.....
+.....
+.....
+0....
+
+CornerSE
+#42b9ff
+.....
+.....
+.....
+.....
+....0
+
+CornerSoilNW
+#705730
+0....
+.....
+.....
+.....
+.....
+
+CornerSoilNE
+#705730
+....0
+.....
+.....
+.....
+.....
+
+CornerSoilSW
+#705730
+.....
+.....
+.....
+.....
+0....
+
+CornerSoilSE
+#705730
+.....
+.....
+.....
+.....
+....0
+
+
 =======
 LEGEND
 =======
@@ -411,6 +716,21 @@ Direction = North or South or West or East
 
 TeleportHint = TeleportOK or TeleportBlocked
 
+CornerN = CornerNE or CornerNW
+CornerS = CornerSE or CornerSW
+CornerW = CornerNW or CornerSW
+CornerE = CornerNE or CornerSE
+
+Corner = CornerNE or CornerNW or CornerSE or CornerSW
+CornerSoil = CornerSoilNE or CornerSoilNW or CornerSoilSE or CornerSoilSW
+
+RedOverlap = RedOverS1 or RedOverN1 or RedOverW1 or RedOverE1 or RedOverS2 or RedOverN2 or RedOverW2 or RedOverE2
+GreenOverlap = GreenOverS1 or GreenOverN1 or GreenOverW1 or GreenOverE1 or GreenOverS2 or GreenOverN2 or GreenOverW2 or GreenOverE2
+BlueOverlap = BlueOverS1 or BlueOverN1 or BlueOverW1 or BlueOverE1 or BlueOverS2 or BlueOverN2 or BlueOverW2 or BlueOverE2
+Overlap = RedOverlap or GreenOverlap or BlueOverlap
+
+BoxBackHV = Box1BackH or Box1BackV or Box2BackH or Box2BackV or Box3BackH or Box3BackV
+
 =======
 SOUNDS
 =======
@@ -430,9 +750,24 @@ Direction
 Box1Back
 Box2Back
 Box3Back
+Box1BackH
+Box1BackV
+Box2BackH
+Box2BackV
+Box3BackH
+Box3BackV
 Exit, ExitClosed
 PortalClosed, PortalOpen
 Solid, BoxBlocker
+Overlap
+CornerSoilNE
+CornerSoilNW
+CornerSoilSE
+CornerSoilSW
+CornerNE
+CornerNW
+CornerSE
+CornerSW
 Eyes
 Water, Spikes
 UndoHint1, UndoHint2, UndoHint3, UndoHint4
@@ -471,6 +806,19 @@ random [ Portal1 no Temp ] -> [ Portal2 ]
 (plant grass for fancy look)
 
 down [ no Ground | Soil ] -> [  | Grass ]
+
+(cut corners from ground)
+
+left [ Ground no CornerSW no CornerSoilSW | no Ground ] -> [ Ground CornerSW | ]
+right [ Ground no CornerSE no CornerSoilSE | no Ground ] -> [ Ground CornerSE | ]
+
+down [ Ground CornerS | Ground ] -> [ Ground | Ground ]
+down [ Ground CornerS | Water ] -> [ Ground | Water ]
+
+down [ Ground CornerSW | BackgroundSoil ] -> [ Ground CornerSoilSW | BackgroundSoil ]
+down [ Ground CornerSE | BackgroundSoil ] -> [ Ground CornerSoilSE | BackgroundSoil ]
+left [ Ground CornerSW | BackgroundSoil ] -> [ Ground CornerSoilSW | BackgroundSoil ]
+right [ Ground CornerSE | BackgroundSoil ] -> [ Ground CornerSoilSE | BackgroundSoil ]
 
 (fill holes in background boxes)
 
@@ -533,6 +881,10 @@ up [ BlueTail1 Last | no Snake South ] -> [ BlueTail1 | BlueTail2 Last South ]
 + right [ BlueTail2 Last | no Snake West ] -> [ BlueTail2 | BlueTail1 Last West ]
 
 (======Pre-Movement======)
+
+[ BackGroundSoil no Snake Corner ] -> [ BackgroundSoil ]
+
+[ BoxBackHV ] -> [  ]
 
 (if there's an undo hint, then a snake is dead -- skip all moves until player presses undo)
 
@@ -688,6 +1040,11 @@ late [ BoxBlocker ] -> [ ]
 
 [ CanMove ][ > Snake stationary Direction no Active ] -> [ CanMove ][ > Snake > Direction ]
 [ stationary Player ][ > Snake stationary Direction ] -> [ stationary Player ][ > Snake > Direction ]
+
+(move corners)
+
+[ Snake > Direction stationary Corner ] -> [ Snake > Direction > Corner ]
+[ Snake > Direction stationary CornerSoil ] -> [ Snake > Direction > CornerSoil ]
 
 (remove direction from last part if snake isn't growing)
 
@@ -954,6 +1311,101 @@ late [ Last no Snake ] -> [ ]
 
 late [ Eyes ] -> []
 late [ Active Head ] -> [ Active Head Eyes ]
+
+(add round corners to snakes)
+
+late down [ Tail North | no North ] -> [ Tail North CornerSW CornerSE | ]
+late up [ Tail South | no South ] -> [ Tail South CornerNW CornerNE | ]
+late right [ Tail West | no West ] -> [ Tail West CornerSE CornerNE | ]
+late left [ Tail East | no East ] -> [ Tail East CornerSW CornerNW | ]
+
+late up [ Tail North | Tail CornerS ] -> [ Tail North | Tail ]
+late down [ Tail South | Tail CornerN ] -> [ Tail South | Tail ]
+late left [ Tail West | Tail CornerE ] -> [ Tail West | Tail ]
+late right [ Tail East | Tail CornerW ] -> [ Tail East | Tail ]
+
+late [ Corner no Snake no Ground ] -> [ ]
+late [ CornerSoil no Snake no Ground ] -> [ ]
+
+late [ Snake CornerNW BackgroundSoil ] -> [ Snake CornerSoilNW BackgroundSoil ]
+late [ Snake CornerNE BackgroundSoil ] -> [ Snake CornerSoilNE BackgroundSoil ]
+late [ Snake CornerSW BackgroundSoil ] -> [ Snake CornerSoilSW BackgroundSoil ]
+late [ Snake CornerSE BackgroundSoil ] -> [ Snake CornerSoilSE BackgroundSoil ]
+
+late [ Snake CornerSoilNW no BackgroundSoil ] -> [ Snake CornerNW ]
+late [ Snake CornerSoilNE no BackgroundSoil ] -> [ Snake CornerNE ]
+late [ Snake CornerSoilSW no BackgroundSoil ] -> [ Snake CornerSW ]
+late [ Snake CornerSoilSE no BackgroundSoil ] -> [ Snake CornerSE ]
+
+(place overlaps on snakes)
+
+late [ Overlap ] -> [ ]
+
+late [ RedTail1 North ] -> [ RedTail1 North RedOverN2 ]
+late [ RedTail1 South ] -> [ RedTail1 South RedOverS2 ]
+late [ RedTail1 West ] -> [ RedTail1 West RedOverW2 ]
+late [ RedTail1 East ] -> [ RedTail1 East RedOverE2 ]
+
+late [ RedTail2 North ] -> [ RedTail2 North RedOverN1 ]
+late [ RedTail2 South ] -> [ RedTail2 South RedOverS1 ]
+late [ RedTail2 West ] -> [ RedTail2 West RedOverW1 ]
+late [ RedTail2 East ] -> [ RedTail2 East RedOverE1 ]
+
+late [ GreenTail1 North ] -> [ GreenTail1 North GreenOverN2 ]
+late [ GreenTail1 South ] -> [ GreenTail1 South GreenOverS2 ]
+late [ GreenTail1 West ] -> [ GreenTail1 West GreenOverW2 ]
+late [ GreenTail1 East ] -> [ GreenTail1 East GreenOverE2 ]
+
+late [ GreenTail2 North ] -> [ GreenTail2 North GreenOverN1 ]
+late [ GreenTail2 South ] -> [ GreenTail2 South GreenOverS1 ]
+late [ GreenTail2 West ] -> [ GreenTail2 West GreenOverW1 ]
+late [ GreenTail2 East ] -> [ GreenTail2 East GreenOverE1 ]
+
+late [ BlueTail1 North ] -> [ BlueTail1 North BlueOverN2 ]
+late [ BlueTail1 South ] -> [ BlueTail1 South BlueOverS2 ]
+late [ BlueTail1 West ] -> [ BlueTail1 West BlueOverW2 ]
+late [ BlueTail1 East ] -> [ BlueTail1 East BlueOverE2 ]
+
+late [ BlueTail2 North ] -> [ BlueTail2 North BlueOverN1 ]
+late [ BlueTail2 South ] -> [ BlueTail2 South BlueOverS1 ]
+late [ BlueTail2 West ] -> [ BlueTail2 West BlueOverW1 ]
+late [ BlueTail2 East ] -> [ BlueTail2 East BlueOverE1 ]
+
+(cut corners from background soil)
+
+late left [ BackgroundSoil | no BackgroundSoil no Ground ] -> [ BackgroundSoil CornerSW CornerNW | ]
+late right [ BackgroundSoil | no BackgroundSoil no Ground ] -> [ BackgroundSoil CornerSE CornerNE | ]
+
+late down [ BackgroundSoil CornerS | Ground ] -> [ BackgroundSoil | Ground ]
+late down [ BackgroundSoil CornerS | BackgroundSoil ] -> [ BackgroundSoil | BackgroundSoil ]
+late down [ BackgroundSoil CornerS | Water ] -> [ BackgroundSoil | Water ]
+
+late up [ BackgroundSoil CornerN | Ground ] -> [ BackgroundSoil | Ground ]
+late up [ BackgroundSoil CornerN | BackgroundSoil ] -> [ BackgroundSoil | BackgroundSoil ]
+
+late [ Snake BackgroundSoil CornerNW no CornerSoilNW ] -> [ Snake BackgroundSoil ]
+late [ Snake BackgroundSoil CornerNE no CornerSoilNE ] -> [ Snake BackgroundSoil ]
+late [ Snake BackgroundSoil CornerSW no CornerSoilSW ] -> [ Snake BackgroundSoil ]
+late [ Snake BackgroundSoil CornerSE no CornerSoilSE ] -> [ Snake BackgroundSoil ]
+
+late [ BoxFront Corner ] -> [ BoxFront ]
+
+(add connections to background boxes)
+
+late horizontal [ Box1Back no Box1BackH | Box1 ] -> [ Box1Back Box1BackH | Box1 ]
+late horizontal [ Box1Back no Box1BackH | Box1Back ] -> [ Box1Back Box1BackH | Box1Back ]
+late vertical [ Box1Back no Box1BackV | Box1 ] -> [ Box1Back Box1BackV | Box1 ]
+late vertical [ Box1Back no Box1BackV | Box1Back ] -> [ Box1Back Box1BackV | Box1Back ]
+
+late horizontal [ Box2Back no Box2BackH | Box2 ] -> [ Box2Back Box2BackH | Box2 ]
+late horizontal [ Box2Back no Box2BackH | Box2Back ] -> [ Box2Back Box2BackH | Box2Back ]
+late vertical [ Box2Back no Box2BackV | Box2 ] -> [ Box2Back Box2BackV | Box2 ]
+late vertical [ Box2Back no Box2BackV | Box2Back ] -> [ Box2Back Box2BackV | Box2Back ]
+
+late horizontal [ Box3Back no Box3BackH | Box3 ] -> [ Box3Back Box3BackH | Box3 ]
+late horizontal [ Box3Back no Box3BackH | Box3Back ] -> [ Box3Back Box3BackH | Box3Back ]
+late vertical [ Box3Back no Box3BackV | Box3 ] -> [ Box3Back Box3BackV | Box3 ]
+late vertical [ Box3Back no Box3BackV | Box3Back ] -> [ Box3Back Box3BackV | Box3Back ]
 
 ==============
 WINCONDITIONS
