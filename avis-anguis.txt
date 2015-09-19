@@ -864,6 +864,8 @@ up [ RedTail1 Last | no Snake South ] -> [ RedTail1 | RedTail2 Last South ]
 + left [ RedTail2 Last | no Snake East ] -> [ RedTail2 | RedTail1 Last East ]
 + right [ RedTail2 Last | no Snake West ] -> [ RedTail2 | RedTail1 Last West ]
 
+[ RedHead ] -> [ RedHead Last ]
+[ RedHead Last ][ RedTail Last ] -> [ RedHead ][ RedTail Last ]
 
 up [ GreenHead | no Snake South ] -> [ GreenHead | GreenTail2 Last South ]
 down [ GreenHead | no Snake North ] -> [ GreenHead | GreenTail2 Last North ]
@@ -880,6 +882,9 @@ up [ GreenTail1 Last | no Snake South ] -> [ GreenTail1 | GreenTail2 Last South 
 + left [ GreenTail2 Last | no Snake East ] -> [ GreenTail2 | GreenTail1 Last East ]
 + right [ GreenTail2 Last | no Snake West ] -> [ GreenTail2 | GreenTail1 Last West ]
 
+[ GreenHead ] -> [ GreenHead Last ]
+[ GreenHead Last ][ GreenTail Last ] -> [ GreenHead ][ GreenTail Last ]
+
 up [ BlueHead | no Snake South ] -> [ BlueHead | BlueTail2 Last South ]
 down [ BlueHead | no Snake North ] -> [ BlueHead | BlueTail2 Last North ]
 left [ BlueHead | no Snake East ] -> [ BlueHead | BlueTail2 Last East ]
@@ -894,6 +899,9 @@ up [ BlueTail1 Last | no Snake South ] -> [ BlueTail1 | BlueTail2 Last South ]
 + down [ BlueTail2 Last | no Snake North ] -> [ BlueTail2 | BlueTail1 Last North ]
 + left [ BlueTail2 Last | no Snake East ] -> [ BlueTail2 | BlueTail1 Last East ]
 + right [ BlueTail2 Last | no Snake West ] -> [ BlueTail2 | BlueTail1 Last West ]
+
+[ BlueHead ] -> [ BlueHead Last ]
+[ BlueHead Last ][ BlueTail Last ] -> [ BlueHead ][ BlueTail Last ]
 
 (======Pre-Movement======)
 
@@ -1044,11 +1052,17 @@ late [ BoxBlocker ] -> [ ]
 (move snake attributes)
 
 [ > Snake stationary Active ] -> [ > Snake > Active ]
-[ > Tail stationary Last ] -> [ > Tail > Last ]
+[ > Snake stationary Last ] -> [ > Snake > Last ]
 
 (don't move Last mark if fruit was consumed)
 
-[ FruitConsumed ][ > Tail Active > Last ] -> [][ > Tail Active stationary Last ]
+[ FruitConsumed ][ > Snake Active > Last ] -> [ FruitConsumed ][ > Snake Active stationary Last ]
+
+[ up Head Active stationary Last ] -> [ up Head Active stationary Last North ]
+[ down Head Active stationary Last ] -> [ down Head Active stationary Last South ]
+[ left Head Active stationary Last ] -> [ left Head Active stationary Last West ]
+[ right Head Active stationary Last ] -> [ right Head Active stationary Last East ]
+
 [ > Snake stationary Active ] -> [ > Snake > Active ]
 
 (only move directions if move wasn't made by player)
@@ -1063,7 +1077,7 @@ late [ BoxBlocker ] -> [ ]
 
 (remove direction from last part if snake isn't growing)
 
-[ CanMove ][ > Tail Active > Last Direction ] -> [ CanMove ][ > Tail Active > Last ]
+[ CanMove ][ > Snake Active > Last Direction ] -> [ CanMove ][ > Snake Active > Last ]
 
 (open portals)
 
@@ -1113,12 +1127,15 @@ late [ FruitConsumed ] -> [ ]
 
 (create new snake part)
 
+late [ Active RedSnake ][ Last no Snake | RedHead ] -> [ Active RedSnake ][ Last RedTail2 Active | RedHead ]
 late [ Active RedSnake ][ Last no Snake | RedTail1 ] -> [ Active RedSnake ][ Last RedTail2 Active | RedTail1 ]
 late [ Active RedSnake ][ Last no Snake | RedTail2 ] -> [ Active RedSnake ][ Last RedTail1 Active | RedTail2 ]
 
+late [ Active GreenSnake ][ Last no Snake | GreenHead ] -> [ Active GreenSnake ][ Last GreenTail2 Active | GreenHead ]
 late [ Active GreenSnake ][ Last no Snake | GreenTail1 ] -> [ Active GreenSnake ][ Last GreenTail2 Active | GreenTail1 ]
 late [ Active GreenSnake ][ Last no Snake | GreenTail2 ] -> [ Active GreenSnake ][ Last GreenTail1 Active | GreenTail2 ]
 
+late [ Active BlueSnake ][ Last no Snake | BlueHead ] -> [ Active BlueSnake ][ Last BlueTail2 Active | BlueHead ]
 late [ Active BlueSnake ][ Last no Snake | BlueTail1 ] -> [ Active BlueSnake ][ Last BlueTail2 Active | BlueTail1 ]
 late [ Active BlueSnake ][ Last no Snake | BlueTail2 ] -> [ Active BlueSnake ][ Last BlueTail1 Active | BlueTail2 ]
 
