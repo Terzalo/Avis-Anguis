@@ -1318,15 +1318,15 @@ late [ Fruit ][ Exit ] -> [ Fruit ][ ExitClosed ]
 
 late [ RedHead Exit ][ RedSnake Last ] -> [ RedHead Exit ][ RedSnake ]
 late [ RedHead Exit ][ RedSnake Number ] -> [ RedHead Exit ][ RedSnake ]
-late [ RedHead Exit ][ RedSnake no Exit ] -> [ RedHead Exit ][ ]
+late [ RedHead Exit ][ RedTail ] -> [ RedHead Exit ][ ]
 
 late [ GreenHead Exit ][ GreenSnake Last ] -> [ GreenHead Exit ][ GreenSnake ]
 late [ GreenHead Exit ][ GreenSnake Number ] -> [ GreenHead Exit ][ GreenSnake ]
-late [ GreenHead Exit ][ GreenSnake no Exit ] -> [ GreenHead Exit ][ ]
+late [ GreenHead Exit ][ GreenTail ] -> [ GreenHead Exit ][ ]
 
 late [ BlueHead Exit ][ BlueSnake Last ] -> [ BlueHead Exit ][ BlueSnake ]
 late [ BlueHead Exit ][ BlueSnake Number ] -> [ BlueHead Exit ][ BlueSnake ]
-late [ BlueHead Exit ][ BlueSnake no Exit ] -> [ BlueHead Exit ][ ]
+late [ BlueHead Exit ][ BlueTail ] -> [ BlueHead Exit ][ ]
 
 late [ Head Exit ][ SnakeCounter 01 ] -> [ Head Exit ][ SnakeCounter 00 ]
 late [ Head Exit ][ SnakeCounter 02 ] -> [ Head Exit ][ SnakeCounter 01 ]
