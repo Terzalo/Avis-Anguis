@@ -366,8 +366,16 @@ Grass
 00000
 00000
 
-Water
+LightWater
 #cdfeff #3572b0
+00000
+11111
+11111
+11111
+11111
+
+DarkWater
+#cdfeff #19446f
 00000
 11111
 11111
@@ -673,7 +681,7 @@ LEGEND
 
 # = Soil
 * = Spikes
-~ = Water
+~ = LightWater
 
 p = Portal1
 E = ExitClosed
@@ -682,6 +690,8 @@ b = Banana
 w = Strawberry
 
 Background = BackgroundSky or BackgroundSoil
+
+Water = LightWater or DarkWater
 
 RedTail = RedTail1 or RedTail2
 RedSnake = RedHead or RedTail
@@ -806,6 +816,11 @@ random [ Portal1 no Temp ] -> [ Portal2 ]
 (plant grass for fancy look)
 
 down [ no Ground | Soil ] -> [  | Grass ]
+
+(make wter dark under ground tiles)
+
+up [ LightWater | Ground ] -> [ DarkWater | Ground ]
+up [ LightWater | BackgroundSoil ] -> [ DarkWater | BackgroundSoil ]
 
 (cut corners from ground)
 
